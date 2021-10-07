@@ -1,0 +1,4 @@
+Windows Registry Editor Version 5.00
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Classes\Folder\shell\.Net Command Prompt\Command]
+@="cmd.exe /k \"C:\\Program Files\\Microsoft Visual Studio .NET 2003\\SDK\\v1.1\\Bin\\sdkvars.bat\" %L"

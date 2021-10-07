@@ -1,0 +1,486 @@
+<?xml version="1.0" ?>
+<?job error="true" debug="true" ?>
+<package>
+	<job id="mom test bvt">
+		<script language="VBScript" src="\\smx.net\tools\ToolBox\DITSUtils\DITSTasks.vbs"/>
+		<script language="VBScript">
+<![CDATA[
+' -------------------------------------------------------------------
+' company: oration
+'
+'
+' summary:
+'	This script will create a MOM TEST Dits job based on the 
+'	arguments the user inputs
+'
+' history:
+'	31-Jul-03 deangj First Creation
+'-------------------------------------------------------------------
+Option Explicit
+Dim Q
+Q = Chr(34)
+
+Main()
+' -------------------------------------------------------------------
+' summary:
+'    gets the password for the specific user account
+'
+'returns:
+'    returns a string containing the password
+'
+' history:
+'	31-Jul-03 deangj First Creation	  
+' -------------------------------------------------------------------
+Function GetAccountPassword(strAccount)
+    On Error Resume Next
+    Dim objCDS
+    Dim strPassword
+    
+    Set objCDS = WScript.CreateObject("CDSCom.Users")
+    If Err.Number <> 0 Then
+        WScript.Echo("Unable to create CDSCom object")
+    End If
+    strPassword = objCDS.GetPassword(strAccount)
+    GetAccountPassword = strPassword
+    
+    Set objCDS = Nothing
+End Function
+
+' -------------------------------------------------------------------
+' summary:
+'    gets the build number for the product in strProduct given the build token
+'
+'returns:
+'    returns a build number
+'
+' history:
+'	25-Aug-03 deangj First Creation	  
+' -------------------------------------------------------------------
+Function GetBuildNum(strProduct, strBuildToken)
+    On Error Resume Next
+    Const iCDSError = 3
+
+    Dim objCDS
+    Dim strBuild
+
+    Set objCDS = WScript.CreateObject("CDSCom.Builds")
+    If Err.Number <> 0 Then
+        WScript.Echo("Unable to create CDSCom object")
+        WScript.Quit(iCDSError)
+    End If
+    strBuild = objCDS.GetLatestBuildByToken(strProduct, strBuildToken)
+    If strBuild = "" Then
+        WScript.Echo("There is no " & strBuildToken & " build for product " & strProduct)
+        WScript.Quit(iCDSError)
+    End If
+    GetBuildNum = strBuild
+
+    Set objCDS = Nothing
+End Function
+
+Public Function MakeRunExecEngineEx(objTasklist,objTask,ByVal sProduct, ByVal sTestType, ByVal sConfig, ByVal sBuild, ByVal sSuite, ByVal sLogs, ByVal sTestPath, ByVal sCover, ByVal bExecMachine)
+' ---------------------------------------------------------------------------------------------------------
+'
+'    This function will create commands to run tests using the execution engine.
+'
+'    Parameters:
+'
+'       objTasklist     The TASKLIST node object returned by MakeTasklist
+'       objTask         The task to add the commands to. If Null a new task is created.
+'       sProduct        Product being tested
+'       sTestType       Level of tests to run (BVT, Smoke, Funcs)
+'       sConfig         Configuration of tests to run - if left blank, Exec Engine uses defaults
+'       sBuild          Build number to test On
+'       sLogs           Where you want test logs save (blank is nowhere)
+'       sTestPath       Where is the test drop located (blank is default, offical code)
+'       sCover          Trace name to save coverage results as (blank is no coverage results saved)
+'       bExecMachine    Is this the main
+'
+'    Returns:
+'        the TASK node object.
+'
+'
+' TO DO: Turn into standard task on Web Service - this becomes wrapper call
+' ---------------------------------------------------------------------------------------------------------
+    Dim objCommand
+
+    If Not IsObject(objTask) Then
+        Set objTask = MakeNewTask(objTasklist,"Run Exec Engine: " & sProduct & "-" & sTestType,0,0,"","","")
+    End If
+
+    If (bExecMachine) Then
+        ' Create the command line to run Exec Engine
+        Dim sCmdLine
+
+        If (sTestPath = Empty) Then
+            sCmdLine = "cscript \\smx.net\drop\" & sProduct & "\" & sBuild & "\x86\exec\exectest.vbs"
+        Else
+            sCmdLine = "cscript " & sTestPath & "\x86\exec\exectest.vbs"
+        End If
+
+        ' Put in mandatory parameters
+        sCmdLine = sCmdLine & " " & sProduct & " " & sTestType & " "
+
+        Dim sMachineSeparator, objMachineList, objMachine
+        sMachineSeparator = ""
+        ' Extract list of machines from job definition - put into Exec Engine
+        Dim sMachineList
+        sMachineList = Chr(34)
+        Set objMachineList = objTasklist.parentNode.parentNode.selectNodes("MACHINE")
+        For Each objMachine In objMachineList
+            sMachineList = sMachineList & sMachineSeparator & "%DITS_" & objMachine.getAttribute("machineid") & "%"
+            sMachineSeparator = ","
+        Next
+        sMachineList = sMachineList & Chr(34)
+        sCmdLine = sCmdLine & sMachineList
+
+        ' Fill in all parameters
+        sCmdLine = sCmdLine & " /build:" & sBuild
+
+        If (sSuite <> Empty) Then
+            sCmdLine = sCmdLine & " /suite:" & chr(34) & sSuite & chr(34)
+        End If
+
+        If (sConfig <> Empty) Then
+            sCmdLine = sCmdLine & " /config:" & chr(34) & sConfig & chr(34)
+        End If
+
+        If (sLogs <> Empty) Then
+            sCmdLine = sCmdLine & " /log:" & chr(34) & sLogs & chr(34)
+        End If
+
+        If (sTestPath <> Empty) Then
+            sCmdLine = sCmdLine & " /droppoint:" & chr(34) & sTestPath & chr(34)
+        End If
+
+        If (sCover <> Empty) Then
+            sCmdLine = sCmdLine & " /cover:" & chr(34) & sCover & chr(34)
+        End If
+
+        Set objCommand = MakeNewCommand(objTask,sCmdLine,-1,-120,"","","")
+        SetCommandOptions objCommand,0,0,False,0,0,"0",False,1,""
+        objCommand.setAttribute "interactive",true
+
+        Set objCommand = MakeNewCommand(objTask,"CScript.exe //nologo %DITS_Path%\ScanLogsEx.vbs %SYSTEMDRIVE%\" & sTestType & " " & sMachineList & " " & sProduct & " DITS",0,0,"","","")
+        SetCommandOptions objCommand,0,0,False,0,0,"0",False,1,""
+    End If
+
+    Set MakeRunExecEngineEx = objTask
+
+End Function
+
+' -------------------------------------------------------------------
+' 
+' summary:
+'	Displays usage information to the user.
+' 
+' remarks:
+'	When function is called it prints all command arguments to the
+'	console.
+' 
+'
+' returns:
+'	returns void
+'
+' history:
+'	31-Jul-03 deangj First Creation	    
+' -------------------------------------------------------------------
+Sub Usage()
+	WSCript.Echo("Usage: momtestbvt.wsf [/pool:] [/m:] [/a:] [/notify:] [/owner:] [/desc:]" _
+	    & " [/build:] [/log:] [/ISOMode:] [/Lang:] [/NOREFRESH] [/test:]")
+	WScript.Echo("/m: - Machine one, this machine will have test code run on it")
+	WScript.Echo(vbTab & "If not specified the default machine pool")
+	WScript.Echo("/a: - Machine two, this machine will not have test code run on it")
+	WScript.Echo(vbTab & "If not specified the default machine pool")
+	WScript.Echo("/pool: - machine pool to use for machines")
+	WScript.Echo(vbTab & "default value for /pool: is SMXZEUS")
+	WScript.Echo("/notify: - list of users to be notified about status from DITS")
+	WScript.Echo(vbTab & "default value for /notify: is %USERNAME%")
+	WScript.Echo(vbTab & "example: asttest,momuser delimit the user with a comma")
+	WScript.Echo("/owner: - user owns the DITS job, must be a user alias")
+	WScript.Echo(vbTab & "default value for /notify: is %USERNAME%")
+	WScript.Echo("/desc: - the name of this DITS job eg. MOM BVTs, MOM Funcs W2K etc.")
+	WScript.Echo(vbTab & "If jobname is more than one word, pleae " & _
+		"enclose in " & Q & Q)
+    WScript.Echo(vbTab & "default value for /desc: is MOMSDK3 %test% on %build%")
+    WScript.Echo(vbTab & "%test% is the value of /test:, %build% is the value for /build:")
+    WScript.Echo("/build:  - the MOMSDK3 build number, supportsn latest or build number")
+    WScript.Echo(vbTab & "default value for /build: is latest")
+    WScript.Echo("/ISOMode: - enable IIS ISO mode - True or false")
+    WScript.Echo(vbTab & "default value for /ISOMode: is false")
+    WScript.Echo("/log: - where you want the test logs put")
+    WScript.Echo(vbTab & "default value for /log: is exec_all")
+    WScript.Echo("/lang: - the language of access and sql to install EN, FR, DE, and JA")
+    WScript.Echo(vbTab & "default value for /lang: is EN")
+    WScript.Echo("/test: - the test you want to run BVT|SMOKE")
+    WScript.Echo(vbTab & "default value for /test: is BVT")
+    WScript.Echo("/norefresh - don't refresh the computer after job completes")
+    WScript.Echo("/QFE: - Comma delimited list of QFEs to run")
+    WScript.Echo(vbTab & "note these need to be full path and exe name")
+    WScript.Quit(1)
+End Sub
+
+' -------------------------------------------------------------------
+' 
+' summary:
+'	Main secion of the script
+' 
+' remarks:
+'	Will perform all DITS tasks as well as parse command line
+'	arguments
+'
+' returns:
+'	returns void
+'
+' history:
+'	31-Jul-03 deangj First Creation
+' -------------------------------------------------------------------
+Sub Main()
+    Const FileServer = "\\smxfiles\scripts\MOMSP1Inst"
+    Const strRefreshScript = "\\smx.net\tools\dits\general\RefreshMachine.wsf"
+    Const strAccount = "asttest"
+    Const strDomain = "smx"
+    Const strDefaultPool = "SMXZEUS"
+    Const strProduct = "MOMSDK3"
+    Const sMSIEXEC = "msiexec.exe /p "
+    Const sQFEParams = " REINSTALL=ALL REINSTALLMODE=omus REBOOT=ReallySuppress /qn"
+     
+    Dim objJobXML, objJobNode, objMachineDCAMNode, objMachineAgentNode
+    Dim objTasklistNode, objEnvironNode, objTaskNode, strInstallMOM, strRunMOMFUNC
+    Dim strOfficeInst, strSQLcmd, strMOMServer, strMOMAgent, strDITSServer
+    Dim strEmail, strOwner, strJobName, objCommand, strBuildNum
+    Dim bISOMode, strIISISOModeCMD, strLog, strInstallSDK
+    Dim strSetupCmd, strPassword, strLang, aSplit, aQFE, bQFE
+    Dim strArg, sSplit, objShell, strTest, strPool, bRefresh
+    Dim strSuite, strConfig, strReboot
+    
+    'Check if inst_momx.vbs is being run under CScript.exe
+    If Not((InStr(1, WScript.FullName, "CSCRIPT", vbTextCompare) <> 0)) Then
+        WriteLogAndQuit "VAR_ABORT - This script must be run with CScript.exe", strLog, iUserError
+    End If
+    
+    Set objShell = WScript.CreateObject("WScript.Shell")
+    strOwner = objShell.ExpandEnvironmentStrings("%USERNAME%")
+    strEmail = strOwner
+    strBuildNum = GetBuildNum("MOMSDK3", "LATEST")
+    strTest = "BVT"
+    strJobName = "MOMSDK3 " & strTest & " on " & strBuildNum
+    strLang = "EN"
+    strLog = "exec_all"
+    strPool = strDefaultPool
+    bRefresh = true
+    strSuite = ""
+    strConfig = ""
+    bISOMode = False
+    bQFE = False
+    
+    For Each strArg In WScript.Arguments
+        aSplit = Split(UCase(strArg), ":", 2)
+        If Not UBound(aSplit) = 0 Then
+            sSplit = aSplit(1)
+        End If
+        Select Case aSplit(0)
+            Case "/?"
+                Usage()
+            Case "/BUILD"
+                strBuildNum = sSplit
+            Case "/M"
+                strMOMServer = sSplit
+            Case "/A"
+                strMOMAgent = sSplit
+            Case "/NOTIFY"
+                strEmail = sSplit
+            Case "/OWNER"
+                strOwner = sSplit
+            Case "/TEST"
+                Select Case sSplit
+                    Case "BVT"
+                        strTest = sSplit
+                    Case "SMOKE"
+                        strTest = sSplit
+                    Case Else
+                        WScript.Echo(sSplit & " is not a valid value for /test:")
+                        WScript.Quit(1)
+                End Select
+            Case "/DESC"
+                strJobName = sSplit
+            Case "/LANG"
+                Select Case sSplit
+                    Case "EN"
+                        strLang = sSplit
+                    Case "FR"
+                        strLang = sSplit
+                    Case "DE"
+                        strLang = sSplit
+                    Case "JA"
+                        strLang = sSplit
+                    Case Else
+                        WScript.Echo(sSplit & " is not a supported language")
+                        WScript.Quit(1)
+                End Select
+            Case "/ISOMODE"
+                Select Case sSplit
+                    Case "TRUE"
+                        bISOMode = True
+                    Case "FALSE"
+                        bISOMode = false
+                    Case Else
+                        WScript.Echo("/ISOMode: only supports TRUE or FALSE")
+                        WScript.Quit(1)
+                End Select
+            Case "/LOG"
+                strLog = sSplit
+            Case "/POOL"
+                strPool = sSplit
+            Case "/NOREFRESH"
+                bRefresh = false
+            Case "/QFE"
+                aQFE = Split(sSplit,",")
+                bQFE = True
+            Case Else
+                WScript.Echo(strArg & " is not a supported argument")
+                WScript.Quit(1)
+        End Select
+    Next
+    
+    'Set the DITS server
+    'strDITSServer = "SMXDITSRV01"
+    'strDITSServer = "BIGHEART"
+    strPassword = GetAccountPassword(strDomain & "\" & strAccount)
+    strSQLcmd = "CScript.exe //nologo \\smx.net\tools\drop\Inst_SQL.vbs /version:ent"
+    strOfficeInst = "\\smx.net\tools\drop\offinst.cmd Access XP"
+    strInstallMOM = FileServer & "\MOMSP1Inst_Wrapper.cmd"
+    strIISISOModeCMD = "\\smx.net\tools\drop\IISIsoMode.cmd 1"
+    strInstallSDK = "msiexec /q /i \\smx.net\builds\momsdk3\en\" & strBuildNum _
+        & "\retail\x86\setup\mcf.msi MMPC_ACCOUNT=" & Q & strAccount & Q & " MMPC_DOMAIN=" _
+        & Q & strDomain & Q & " MMPC_PASSWORD=" & Q & strPassword & Q _
+        & " /l*v %SYSTEMDRIVE%\logs\InstSDK.log"
+    strReboot = "shutdown -r -f -t 3"
+    
+    If strMOMServer = "" Then
+    	strMOMServer = "pool=" & strPool
+    End If
+    If strMOMAgent = "" Then
+    	strMOMAgent = "pool=" & strPool
+    End if
+    
+    ' Echo out to user summary of what job is going to do
+    WScript.Echo
+    WScript.Echo "Running MOMSDK3 " & strTest & " using MOMSDK3 Build " & strBuildNum
+    WScript.Echo "Results will be sent to: " & strEmail
+    WScript.Echo
+    WScript.Echo "Machines"
+    WScript.Echo "  Machine One :     " & strMOMServer
+    WScript.Echo "  Machine Two :     " & strMOMAgent
+    WScript.Echo
+    
+    If (bRefresh) Then
+    	WScript.Echo "Machines will be refreshed at end of test"
+    Else
+    	WScript.Echo "Machines will NOT be refreshed at end of test"
+    End if
+    
+    'Start the XML Job
+    Set objJobXML = MakeJobXML()
+    
+    'Create a new job
+    Set objJobNode = MakeNewJob(strJobName, strEmail, strOwner, "MOMSDK3 BVTs", 0, "", "", "")
+    objJobXML.appendChild objJobNode
+    
+    'Create a New machine
+    Set objMachineDCAMNode = MakeNewMachine(objJobNode, "DCAM", strMOMServer, "", "", "", "")
+    Set objMachineAgentNode = MakeNewMachine(objJobNode, "Agent", strMOMAgent, "", "", "", "")
+    
+    'Create a new task list
+    Dim objTaskListAgentNode
+    Set objTasklistNode = MakeNewTaskList(objMachineDCAMNode, "Tests", "", "", "")
+    Set objTaskListAgentNode = MakeNewTaskList(objMachineAgentNode, "Tests", "", "", "")
+    
+    'Set loc to specified language
+    Set objEnvironNode = MakeNewEnvironment(objTasklistNode, "loc", strLang)
+    Set objEnvironNode = MakeNewEnvironment(objTaskListAgentNode, "loc", strLang)
+    
+    'Install  DITS Client
+    MakeStandardTask objTasklistNode,"DITSInit",Null,"","",""
+    MakeStandardTask objTaskListAgentNode,"DITSInit",Null,"","",""
+    
+    'Create a test to install SQL Server 2000 Enterprise
+    Set objTaskNode = MakeNewTask(objTasklistNode, "Install SQL Server 2000 SP3", False, False, "", "", "")
+    MakeNewCommand objTaskNode, strSQLcmd, -1, 0, "", "", ""
+    Set objTaskNode = MakeNewTask(objTaskListAgentNode, "Install SQL Server 2000 SP3", False, False, "", "", "")
+    MakeNewCommand objTaskNode, strSQLcmd, -1, 0, "", "", ""
+    
+    'Create a test to install Access 2000
+    Set objTaskNode = MakeNewTask(objTasklistNode, "Install Access XP", False, False, "", "", "")
+    Set objCommand = MakeNewCommand(objTaskNode, strOfficeInst, -1, -30, "", "", "")
+    Set objTaskNode = MakeNewTask(objTaskListAgentNode, "Install Access XP", False, False, "", "", "")
+    Set objCommand = MakeNewCommand(objTaskNode, strOfficeInst, -1, -30, "", "", "")
+    
+    'Install MOM10SP1
+    Set objTaskNode = MakeNewTask(objTasklistNode, "Install MOM10SP1 Typical", False, False, "", "", "")
+    MakeNewCommand objTaskNode, strInstallMOM, -1, -30, "", "", ""
+    Set objTaskNode = MakeNewTask(objTaskListAgentNode, "Install MOM10SP1 Typical", False, False, "", "", "")
+    MakeNewCommand objTaskNode, strInstallMOM, -1, -30, "", "", ""
+        
+    'Set IIS ISO Mode
+    If (bISOMode) Then
+        Set objTaskNode = MakeNewTask(objTasklistNode, "Set IIS ISO Mode", False, False, "", "", "")
+        MakeNewCommand objTaskNode, strIISISOModeCMD, -1, 0, "", "", ""
+        Set objTaskNode = MakeNewTask(objTaskListAgentNode, "Set IIS ISO Mode", False, False, "", "", "")
+        MakeNewCommand objTaskNode, strIISISOModeCMD, -1, 0, "", "", ""
+    End If
+        
+    'Install MOMSDK3
+    Set objTaskNode = MakeNewTask(objTasklistNode, "Install MOMSDK3", False, False, "", "", "")
+    MakeNewCommand objTaskNode, strInstallSDK, -1, 0, "", "", ""
+    Set objTaskNode = MakeNewTask(objTaskListAgentNode, "Install MOMSDK3", False, False, "", "", "")
+    MakeNewCommand objTaskNode, strInstallSDK, -1, 0, "", "", ""
+    
+    If(bQFE) Then
+        Dim oShell, oFSO, sQFE
+        Set oShell = WScript.CreateObject("WScript.Shell")
+        Set oFSO = WScript.CreateObject("Scripting.FileSystemObject")
+        For Each sQFE In aQFE
+            If oFSO.FileExists(sQFE) Then
+                Set objTaskNode = MakeNewTask(objTasklistNode, "Install QFE" & sQFE, False, False, "", "", "")
+                MakeNewCommand objTaskNode, sMSIEXEC & sQFE & sQFEParams, -1, 0, "", "", ""
+                Set objTaskNode = MakeNewTask(objTaskListAgentNode, "Install QFE" & sQFE, False, False, "", "", "")
+                MakeNewCommand objTaskNode, sMSIEXEC & sQFE & sQFEParams, -1, 0, "", "", ""
+                'Restart IIS
+                Set objTaskNode = MakeNewTask(objTasklistNode, "Stop IIS", False, False, "", "", "")
+                MakeNewCommand objTaskNode, "net stop w3svc", -1, 0, "", "", ""
+                Set objTaskNode = MakeNewTask(objTaskListAgentNode, "Stop IIS", False, False, "", "", "")
+                MakeNewCommand objTaskNode, "net stop w3svc", -1, 0, "", "", ""
+                Set objTaskNode = MakeNewTask(objTasklistNode, "Start IIS", False, False, "", "", "")
+                MakeNewCommand objTaskNode, "net start w3svc", -1, 0, "", "", ""
+                Set objTaskNode = MakeNewTask(objTaskListAgentNode, "Start IIS", False, False, "", "", "")
+                MakeNewCommand objTaskNode, "net start w3svc", -1, 0, "", "", ""
+            Else
+                WScript.Echo "Cannot find " & sQFE
+            End If
+        Next
+    End If
+    
+    MakeRunExecEngineEx objTasklistNode,Null,strProduct,strTest, strConfig, strBuildNum, strSuite, strLog,"","",true
+    MakeRunExecEngineEx objTaskListAgentNode,Null,strProduct,strTest, strConfig, strBuildNum, strSuite, strLog,"","",false
+    
+    If (bRefresh) Then
+    	strSetupCmd = "cscript //nologo " & strRefreshScript & " /O:" & strOwner & " /N:" & strEmail & " /M:%DITS_DCAM% /Server:" & sDITSServer
+    	set objTaskNode = MakeNewTask(objTasklistNode, "Launching Refresh job",True,False,"","","")
+        MakeNewCommand objTaskNode, strSetupCmd, -1, 0, "", "", ""
+    	strSetupCmd = "cscript //nologo " & strRefreshScript & " /O:" & strOwner & " /N:" & strEmail & " /M:%DITS_AGENT% /Server:" & sDITSServer
+        set objTaskNode = MakeNewTask(objTaskListAgentNode, "Launching Refresh job",True,False,"","","")
+    	MakeNewCommand objTaskNode, strSetupCmd, -1, 0, "", "", ""
+    End If
+    
+    'Termationate DITS
+    Set objTaskNode = MakeStandardTask(objTasklistNode, "DITSTerm" , Null, "", "", "")
+    Set objTaskNode = MakeStandardTask(objTaskListAgentNode, "DITSTerm" , Null, "", "", "")
+    
+    	'Submit the DITS Job
+    SubmitJob objJobXML, sDITSServer, False, False
+End Sub
+]]>
+		</script>
+	</job>
+</package>

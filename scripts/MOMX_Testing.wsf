@@ -1,0 +1,1278 @@
+<?xml version="1.0" ?>
+<package>
+	<comment>
+	Primalscript wizard generated file.
+	</comment>
+	<job id="Job1">
+		<?job error="false" debug="false" ?>
+		<script language="VBScript" src="\\smx.net\tools\ToolBox\DITSUtils\DITSTasks.vbs"/>
+		<script id="MOMX_Testing" language="VBScript">
+<![CDATA[
+' ==========================================================
+'	Tool to allow automated running of MOMX BVTs using DITS
+'       Can do the testing in a distributed manner
+'       Prototype system
+'
+'	Author: Glennlav
+'	Date: 08/08/2003
+' ==========================================================
+
+Option Explicit
+'
+' Nice happy constants
+Const cProgInfo = "MOMX Testing - Ver 1.0"
+Const cFiveMinInSec = 600
+
+' Info about servers, shares and external scripts
+Const cDITSServer = "BIGHEART"
+Const cOfficialBuildRoot = "\\smx.net\builds\momx\en"
+Const cOfficialTestRoot = "\\smx.net\drop\momx"
+Const cPrivateBinaryRoot = "\\smxfiles\privates"
+
+' ensure this file is run using cscript
+If (LCase(RIGHT(Wscript.FullName,11)) = "wscript.exe") Then
+	WScript.Echo "This script must be executed using cscript.exe, please rerun."
+	WScript.Quit 1
+End If		
+    
+' ensure that a proper version of WSH is being used
+If (WScript.Version < 5.6) then
+	WScript.Echo "Please upgrade your WSH to at least version 5.6 (run \\smx.net\tools\drop\updateWSH-XML.cmd)"
+	WScript.Quit 1
+End If
+
+WScript.Quit Main()
+
+' ==========================================================
+' Main Function
+' ==========================================================
+Function Main
+    ' Create the objects we use
+    Dim objShell, objArgs, objArg, objEnv, objFSO
+    Set objShell = WScript.CreateObject("WScript.Shell")
+    Set objArgs  = Wscript.Arguments
+    Set objEnv   = objShell.Environment("Process")
+    Set objFSO = CreateObject("Scripting.FileSystemObject")
+    
+    WScript.Echo
+    WScript.Echo cProgInfo
+    WScript.Echo
+    
+    ' Declare variables and fill in with reasonable default values
+        
+    ' DITS job detail
+    Dim sNotify, sOwner, sDesc, sComments, objTask
+    sDITSServer = cDITSServer
+    sNotify = objEnv("USERNAME")
+    sOwner = objEnv("USERNAME")
+    sDesc = Empty
+    sComments = Empty
+
+    ' Job control flags
+    Dim bDebugJob, bRefresh, bEcho, bSQL
+    bRefresh = True
+    bDebugJob = False
+    bEcho = False
+    bSQL = True
+    
+    ' Information about machines to test on
+    Dim sOS, sMachineName, sMachines, sMachineQuery
+    sMachines = "dist"
+    sOS = "W2K"
+    
+    ' Info about product to test
+    Dim sBuild, sPrivates, sFullPrivates, sFullPath, sProductPath, sProductLang
+    Dim sProductSKU, bInstallMCF, sOptionalParms, sMOMXVersion, bMOMXCustomInstall
+    sFullPath = Empty
+    sBuild = "latest"
+    sPrivates = Empty
+    sFullPrivates = Empty
+    sProductPath = Empty
+    sProductLang = "EN"
+    sProductSKU = "nonopt"
+    bInstallMCF = True
+    bMOMXCustomInstall = False
+    
+    
+    ' Info about tests to run
+    Dim sTestDrop, sSuites, sConfig, sLogs, sTrace, sTests, iNumMachines
+    sTestDrop = Empty
+    sSuites = Empty
+    sConfig = Empty
+    sLogs = Empty
+    sTrace = False
+    sTests = "BVT"
+    iNumMachines = 2
+    
+    ' Do some argument checking
+    If objArgs.Count > 0 Then
+    	For Each objArg in objArgs.Named
+    		Select Case UCase(objArg)
+    			Case "?"
+    				Usage
+    				Main = 0
+    				Exit Function
+    			Case "SERVER"
+    				sDITSServer = LCase(objArgs.Named(objArg))
+    			Case "O"
+    				sOwner = LCase(objArgs.Named(objArg))
+    			Case "N"
+    				sNotify = LCase(objArgs.Named(objArg))
+    			Case "B"
+    				sBuild = LCase(objArgs.Named(objArg))
+    			Case "P"
+    				sPrivates = LCase(objArgs.Named(objArg))
+    			Case "MACH"
+    				sMachines = LCase(objArgs.Named(objArg))
+       			Case "TESTPATH"
+    				sTestDrop = LCase(objArgs.Named(objArg))
+    			Case "PRODUCTPATH"
+    				sProductPath = LCase(objArgs.Named(objArg))
+    			Case "PRODUCTLANG"
+    				sProductLang = LCASE(objArgs.Named(objArg))
+    			Case "PRODUCTSKU"
+    				sProductSKU = LCASE(objArgs.Named(objArg))
+    			Case "DESC"
+    				sDesc = LCase(objArgs.Named(objArg))
+    			Case "COMMENTS"
+    				sComments = LCase(objArgs.Named(objArg))
+    			Case "SUITES"
+    				sSuites = LCase(objArgs.Named(objArg))
+    			Case "CONFIG"
+    				sConfig = LCase(objArgs.Named(objArg))
+    			Case "OS"
+    				sOS = LCase(objArgs.Named(objArg))
+    			Case "TESTS"
+    				sTests = UCase(objArgs.Named(objArg))
+    			Case "TESTLOGS"
+    				sLogs = LCase(objArgs.Named(objArg))
+    			Case "COVERAGE"
+                    sTrace = "AUTO"
+    			Case "DEBUGJOB"
+    				bDebugJob = True
+    			Case "ECHO"
+    				bEcho = True
+    			Case "NOREFRESH"
+    				bRefresh = False
+    			Case "NOSQL"
+    				bSQL = False
+    		    Case "INSTALLMCF"
+    		        If UCase(objArgs.Named(objArg)) = "TRUE" Then
+    		            bInstallMCF = True
+    		        ElseIf UCase(objArgs.Named(objArg)) = "FALSE" Then
+    		            bInstallMCF = False
+    		        Else
+    		            WScript.Echo ""
+    				    WScript.Echo "----- Invalid Parameter for /" & objArg
+    				    WScript.Echo "------Must be TRUE or FALSE"
+    				    WScript.Echo ""
+    				    Usage
+    				    Main = 1
+    				    Exit Function
+    			    End If
+    			Case "MOMXVERSION"
+    			    bMOMXCustomInstall = True
+    			    Select Case UCase(objArgs.Named(objArg))
+    			        Case "DB_UI"
+    			            sMOMXVersion = "DB_UI"
+    			        Case "COMPLETE"
+    			            sMOMXVersion = "COMPLETE"
+    			        Case "COMPLETE_REPORTING"
+    			            sMOMXVersion = "COMPLETE_REPORTING"
+    			        Case Else
+    			            WScript.Echo ""
+    				        WScript.Echo "----- Invalid Parameter for /" & objArg
+    				        WScript.Echo "------Please see usage"
+    				        WScript.Echo ""
+    				        Usage
+    				        Main = 1
+    				        Exit Function
+    		        End Select
+
+    			Case "OPTIONALPARMS"
+    			    sOptionalParms = UCase(objArgs.Named(objArg))
+    			Case Else
+    				WScript.Echo ""
+    				WScript.Echo "----- Invalid Parameter /" & objArg
+    				WScript.Echo ""
+    				Usage
+    				Main = 1
+    				Exit Function 
+    		End Select
+    	Next
+    End If
+    
+    '
+    ' Do validation of user input
+    '
+    ' If private test drop, verify it exists
+    If (sTestDrop <> Empty) then
+    	If (objFSO.FolderExists(objFSO.BuildPath(sTestDrop, "x86\\exec")) = False) then
+    		WScript.Echo "There is no valid test drop at " & sTestDrop
+    		Main = 2
+    		Exit Function
+        End If
+    End If
+
+    
+    ' Either figure out which official build to use or verify private build
+    If (sProductPath = Empty) Then
+        If (LCase(sBuild) <> "latest") then
+        	sFullPath = objFSO.BuildPath(cOfficialBuildRoot, sBuild)
+        	If (objFSO.FolderExists(sFullPath) = False) then
+     			WScript.Echo "Error: Could find no MOMX build corresponding to " & sBuild
+    			Main = 2
+    			Exit Function
+        	End If
+        	If (sTestDrop = Empty) then
+        	    sTestDrop = objFSO.BuildPath(cOfficialTestRoot, sBuild)
+        	End If
+        else
+        	Dim LatestBuild
+        	LatestBuild = CDSBuild("momx","latest")                ' use input product and build from user to quesry CDS
+            sBuild = LatestBuild
+        	sFullPath = objFSO.BuildPath(cOfficialBuildRoot, LatestBuild)
+        	If (sTestDrop = Empty) then
+        	    sTestDrop = objFSO.BuildPath(cOfficialTestRoot, LatestBuild)
+        	End If
+        End If
+    Else
+    	If (objFSO.FolderExists(sProductPath) = False) then
+ 			WScript.Echo "Error: Could find no MOMX build at " & sProductPath
+			Main = 2
+			Exit Function
+    	End If
+    	sBuild = CDSBuild("momx","latest")                ' Uses latest test code on custom product builds
+    	If (sTestDrop = Empty) then
+    	    sTestDrop = objFSO.BuildPath(cOfficialTestRoot, sBuild)
+    	End If
+    	sFullPath = sProductPath
+    End If    
+    
+    ' If using private binaries for product, check to see If folder at least exists
+    If (sPrivates <> "") then
+        sFullPrivates = objFSO.BuildPath(cPrivateBinaryRoot, sPrivates)
+    	If (objFSO.FolderExists(sFullPrivates) = False) then
+    		WScript.Echo "There is no private binary folder at " & sFullPrivates
+    		Main = 2
+    		Exit Function
+        End If
+    End If
+    
+      ' Validate choice of test suite and figure out number of machines it uses
+    Select Case LCase(sTests)
+        Case "bvt"
+            iNumMachines = 2
+        Case "smoke"
+            iNumMachines = 2
+        Case "func"
+            iNumMachines = 3
+        Case Else
+            WScript.Echo "Tests choice invalid: " & sTests
+            Usage
+            Main = 2
+            Exit Function
+    End Select
+    
+    ' Don't allow asttest to be used as notificaiton alias
+    If (LCase(sNotify) = "asttest") then
+        WScript.Echo
+    	WScript.Echo "--- ERROR ---"
+    	Wscript.Echo "Running under asttest - please put in explicit notificaiton alias (/N:)"
+    	Main = 2
+    	Exit Function
+    End If
+    
+    ReDim sMachineQuery(iNumMachines)
+    ReDim sMachineName(iNumMachines)
+    
+    ' ==========================================================================
+    ' Start working on what machine are going to be in the dits job
+    ' ==========================================================================
+    Dim sQuery
+    ' Figure out what we are testing on
+    If (sMachines = "dist") Then
+        ' Validate choice of O/S. Populate correct XPath expression to get machines with that O/S
+        ' that are not in the safe O/S
+        Select Case LCase(sOS)
+            ' Doing distributed testing
+            Case "w2k"
+                sQuery = "Machine[OS/@OS='W2K' and OS/@On='1' and OS/@LD!='C']"
+            Case "w2k3"
+                sQuery = "Machine[OS/@OS='NET' and OS/@On='1' and OS/@LD!='C']"
+            Case Else
+                WScript.Echo "OS choice invalid: " & sOS
+                Usage
+                Main = 1
+                Exit Function
+        End Select
+        For j = 0 To iNumMachines - 1
+            sMachineName(j) = Empty
+            sMachineQuery(j) = sQuery
+        Next
+    Elseif (Left(sMachines,5) = "pool=") Then
+        ' Getting machines from a pool
+        For j = 0 To iNumMachines - 1
+            sMachineQuery(j) = Empty
+            sMachineName(j) = sMachines
+        Next
+    Else
+        ' Specified name of machines - need to figure out
+        sMachineName = Split(sMachines,",",-1,1) 
+        If ((UBound(sMachineName) + 1) <> iNumMachines) Then
+            WScript.Echo " Mismatch in machine input"
+            WScript.Echo "   you specified " & (UBound(sMachineName) + 1) & " machines but these tests require " & iNumMachines
+            Main = 2
+            Exit Function
+        End If
+    End If 
+    
+    ' Echo out to user summary of what job is going to do
+    WScript.Echo vbTab & " Running MOMX " & sTests & " tests"
+    WScript.Echo
+    If (Left(sMachines,5) = "pool=") Then
+        WScript.Echo vbTab & " Using machines from " & sMachines
+    Elseif (sMachines = "dist") Then
+        WScript.Echo vbTab & " Using any available machines with " & sOS & " operating system"
+    Else 
+        WScript.Echo vbTab & " Using these machines:"
+        For j = 0 To iNumMachines - 1
+            WScript.Echo vbTab & vbTab & sMachineName(j)
+        Next
+    End If
+    WScript.Echo
+    WScript.Echo vbTab & " MOMX Build at: " & sFullPath
+   	WScript.Echo vbTab & " Test Code drop : " & sTestDrop
+    WScript.Echo vbTab & " Results sent to: " & sNotify
+    If (sTrace <> Empty) Then
+        WScript.Echo vbTab & " Coverage Information will be collected"
+    End If
+ 
+    WScript.Echo
+    If (bRefresh) then
+    	WScript.Echo vbTab & " Machines will be refreshed at end of testing"
+    else
+    	WScript.Echo vbTab & " Machines will NOT be refreshed at end of testing"
+    End If
+    
+    WScript.Echo
+    
+    ' Create a nice description string for DITS job If user did not put one in
+    If (sDesc = Empty) then
+        sDesc = "MOMX DIST " & sTests & " - "
+        If (LCase(sBuild) <> "latest") then
+          sDesc=sDesc & sBuild
+        else
+          sDesc = sDesc & CDSBuild("momx","latest")
+        End If
+        sDesc = sDesc & " " & sProductSKU 
+        sDesc = sDesc & " (" & sProductLang & ")"
+        If (sPrivates <> Empty) then
+        	sDesc = sDesc & " (privates: " & sPrivates & ")"
+        End If
+        If (sTrace <> Empty) then
+        	sDesc = sDesc & " [Coverage]"
+        End If
+    End If
+    
+    ' ==========================================================================    
+    ' Now actually start creating the DITS job to run things - boilerplate code
+    ' (see DITS job creation document)
+    ' ==========================================================================
+    Dim objJobXML
+    Dim objJobNode
+    
+    Dim aSuites
+    
+    Dim i,j
+    If (sSuites = Empty) Then
+        GetTestSuites aSuites, sTestDrop
+    Else
+        aSuites = Split(sSuites,",")
+    End If
+
+    Dim sBaseDesc
+    sBaseDesc = sDesc
+    
+    Dim sGroup
+    sGroup = "Dist at " & Time
+    
+    ' Keep count of how many machines we are using 
+    Dim iMachCount
+    iMachCount = 1
+
+    ' TODO : Create outer XML Node - this is holds the JOBS
+    Dim objJobs
+    Set objJobs = CreateObject(DOMDOCUMENT)
+    objJobs.setProperty "SelectionLanguage","XPath"
+    objJobs.async = False
+
+    Dim objJobsEle
+    Set objJobsEle = objJobs.createElement("JOBS")
+    objJobs.appendChild objJobsEle
+
+    For i = LBound(aSuites) To UBound(aSuites) 
+         WScript.Echo "Creating test job for suite: " & aSuites(i)
+       
+        Set objJobXML = Nothing
+        Set objJobNode = Nothing
+        
+        sDesc = sBaseDesc & " suite:" & aSuites(i)
+        
+        ' Make the XML doc that defines the DITS job
+        Set objJobXML = MakeJobXML()
+
+        ' Create the references to each refresh job per machine
+        Dim sChildJobs
+        sChildJobs = Empty
+        For j = 0 To iNumMachines - 1
+            If (sChildJobs <> Empty) Then
+                sChildJobs = sChildJobs & ","
+            End If
+            sChildJobs = sChildJobs & "Refresh" & iMachCount + j 
+        Next
+       
+        ' Change to MakeDITSJob - add name, release, group, hold
+        Set objJobNode = MakeDITSJob(sDITSServer, sDesc, sNotify, sOwner, sComments, 0, 128, 0, sGroup, sChildJobs)
+        objJobXML.appendChild objJobNode
+        
+        ' Create machine nodes
+        Dim objMachineDCAMNode
+        Dim objMachineAgentNode
+
+
+        For j = 1 To iNumMachines
+        
+            ' Put in transfer node
+             Dim objMachineNode
+             Set objMachineNode = MakeDITSMachine(sDITSServer, objJobNode, "Machine" & iMachCount, sMachineName(j - 1), "Refresh" & iMachCount & ".Machine", sMachineQuery(j - 1), Empty, Empty, Empty)
+             iMachCount = iMachCount + 1
+
+             ' Setup tasklists for each machine
+             Dim objTasklistNode
+             Set objTasklistNode = MakeDITSTaskList(sDITSServer, objMachineNode,"MOMX Dist Testing",Empty,Empty,Empty,Empty,Empty,True)
+             
+             ' Turn on echo for all batch files executed
+             If (bEcho) Then
+                 MakeDITSEnvironment sDITSServer,objTasklistNode,"ECHO","ON"
+             End If
+        
+        Next
+        
+        ' Init DITS on all machines
+        AllInitOrTerm objJobNode, True
+    
+        ' Turn off AV Detector
+        MakeAVDetectorAll objJobNode, False
+
+        ' Install Coverage runtime
+        If (sTrace <> Empty) Then
+            MakeInstallCoverageRuntimeAll objJobNode
+        End If
+
+        ' ======================================================================
+        ' Install SQL and Rosetta
+        ' ======================================================================
+        If (bSQL) Then
+             ' Install SQL - DCAM only
+             MakeInstallSQL GetTaskList(objJobNode,1),Null,"ENT","",""
+             WaitStep objJobNode, "SQL Install", true
+         
+             ' Install Rosetta - DCAM only
+             MakeInstallRosettab GetTaskList(objJobNode,1), Null, Empty
+             WaitStep objJobNode, "Rosetta Install", true
+        End If
+        
+        ' ======================================================================
+        ' Install MOMX with Reporting - DCAM only
+        ' ======================================================================
+        If UCase(sProductSKU) = "COVER" Then
+            bInstallMCF = False
+        End If
+        
+        If(bMOMXCustomInstall) Then
+            MakeInstallMOMXCustom GetTaskList(objJobNode,1), sBuild, sProductSKU, sProductLang, sMOMXVersion, sOptionalParms
+            WaitStep objJobNode, "MOMX Reporting Install", true
+        Else
+            MakeInstallMOMXFullb GetTaskList(objJobNode,1), sBuild, sProductSKU, sProductLang, sProductPath, bInstallMCF
+            WaitStep objJobNode, "MOMX Reporting Install", true
+        End If
+
+        'Reboot after install MOMX install   
+        Set objTask = MakeNewTask(GetTaskList(objJobNode,1), "Reboot", False, False, "", "", "")
+        MakeNewCommand objTask, "shutdown.exe -r -f -t 30", -1, 60, "", "", "" 
+        WaitStep objJobNode, "Rebooting", true
+        
+        ' Install Private binaries
+        If (sPrivates <> "") then
+            MakeInstallPrivateBinaries GetTaskList(objJobNode,1), Null, cPrivateBinaryRoot, sPrivates, Chr(34) & "%ProgramFiles%\Microsoft Operations Manager 2004" & Chr(34)
+            WaitSetp objJobNode, "Private Binary Install", true
+        End If
+        
+        ' Turn on AV Detector
+        MakeAVDetectorAll objJobNode, True
+        
+        ' Collect coverage information generated by setuping up product
+        If (sTrace <> Empty) Then
+            MakeImportCoverageInfo GetTaskList(objJobNode,1), "Install-" & sTests & "-NULL-" & sTrace
+            WaitStep objJobNode, "Setup Coverage Import", True
+        End If
+
+         ' Run MOMX BVTs
+        MakeRunExecEngineEx GetTaskList(objJobNode,1), Null, "MOMX", sTests, sConfig, sBuild, aSuites(i), sLogs, sTestDrop, sTrace, True
+        WaitStep objJobNode, "Run BVTs", True
+
+        ' Collect coverage information generated tests on Agent - will be removed soon
+        If (sTrace <> Empty) Then
+            MakeNewTask GetTaskList(objJobNode,1),"Wait for coverage info from agent",False,False,"","",""
+            MakeImportCoverageInfo  GetTaskList(objJobNode,2), "Agent-" & sTests & "-NULL-" & sTrace
+        End If
+        
+        ' Turn off AV Detector
+        MakeAVDetectorAll objJobNode, False
+
+        ' Term DITS on all machines
+        AllInitOrTerm objJobNode, False
+        
+        objJobsEle.appendChild objJobXML.SelectSingleNode("JOB")
+    Next 
+    
+    ' Now create a refresh DITS job for every machine used.
+    If (bRefresh) Then
+        For i = 1 To iMachCount - 1
+            Set objJobXML = Nothing
+            Set objJobNode = Nothing
+                 
+            Set objJobXML = MakeJobXML()
+            Set objJobNode = MakeDITSJob(sDITSServer, "Refresh" & i, sNotify, sOwner, sComments, 0, 128, 1, sGroup, Empty)
+            objJobXML.appendChild objJobNode
+
+            ' Need to Set an object node for every machine
+            Dim objMachineNodes, objTaskNodes
+            Set objMachineNodes = MakeDITSMachine(sDITSServer, objJobNode, "Machine", Empty, Empty, Empty, Empty, Empty, Empty)
+            Set objTaskNodes = MakeNewTaskList(objMachineNodes,"","","","")
+             
+            MakeStandardTask objTaskNodes,"DITSInit",Null,"","",""
+            MakeRefreshOS objJobXML,objTaskNodes,Null
+            MakeStandardTask objTaskNodes,"DITSTerm",Null,"","",""
+
+            objJobsEle.appendChild objJobXML.SelectSingleNode("JOB")
+        Next
+    End If
+    SubmitJob objJobs,sDITSServer,bDebugJob,bDebugJob
+
+    Wscript.Echo
+    Wscript.Echo "To get info on this job, goto http://SMXInfranet/DITSUI"
+
+    Main = 0
+End Function
+
+' ==============================================================================
+' WaitStep - waits for a DITS step to complete
+' ==============================================================================
+Sub WaitStep(objJob, sDesc, bSkipFirstMachine)
+    Dim objTasklist, objMachineList, objMachine
+    
+    Set objMachineList = objJob.selectNodes("MACHINE")
+    For Each objMachine In objMachineList
+        Set objTasklist = objMachine.selectSingleNode("TASKLIST")
+        If (bSkipFirstMachine) Then
+            bSkipFirstMachine = False
+        Else
+            MakeNewTask objTasklist,"Wait Task - " & sDesc,False,False,"","",""
+       End If
+    Next
+End Sub
+
+
+Sub AllInitOrTerm(objJob, bInit)
+    Dim objTasklist, objMachineList, objMachine
+    
+    Dim bFirstMachine
+    bFirstMachine = True
+    
+    Set objMachineList = objJob.selectNodes("MACHINE")
+    For Each objMachine In objMachineList
+        Set objTasklist = objMachine.selectSingleNode("TASKLIST")
+        If (bInit) Then
+            MakeStandardTask objTasklist,"DITSInit",Null,"","",""
+        Else
+            MakeStandardTask objTasklist,"DITSTerm",Null,"","",""
+       End If
+    Next
+End Sub
+
+Function GetTaskList(objJob, iMachineNumber)
+    Dim objMachineList, objMachine
+    Dim i
+    i = 1
+    Set GetTaskList = Nothing
+        
+    Set objMachineList = objJob.selectNodes("MACHINE")
+    For Each objMachine In objMachineList
+        If (i = iMachineNumber) Then
+            Set GetTaskList = objMachine.selectSingleNode("TASKLIST")
+        End If
+        i = i + 1
+    Next
+End Function
+
+'================== Get Latest build number from CDS =====================
+Function CDSBuild(PRODUCT,TESTBUILD)
+ 
+    On Error Resume Next   ' allow us to deal with any errors from CDS
+    
+    Dim objCDSBuild
+    Set objCDSBuild = CreateObject("CDSCOM.Builds")
+    
+    If objCDSBuild IS Nothing Then    ' quit If CDScom.dll is not functioning properly
+        WScript.Echo "Can not access the CDS object - latest build info not available"
+        WScript.Echo "Please make sure CDSCOM.DLL is on the system and registered"
+        WScript.Quit 1
+    End If
+    
+    CDSBuild = objCDSBuild.GetLatestBuildByToken(PRODUCT,"latest")  ' get info from the CDS
+    
+    If (Err <> 0) OR (CDSBuild = "") Then
+        CDSBuild = "LATEST"
+        WScript.Echo "Could not retrieve latest build info for " & PRODUCT
+        WScript.Echo "Using " & CHR(34) & CDSBuild & CHR(34) & " as build input..."
+        WScript.Echo
+    End If
+    
+    On Error goto 0
+    
+    Set objCDSBuild = NOTHING
+ 
+End Function
+
+Sub GetTestSuites(ByRef aSuites, sTestDrop)
+    Dim objXML
+    Dim objSuiteNodes, objSuiteNode
+    Dim i
+        
+    Set objXML = CreateObject("msxml2.DOMDocument")
+    ' Ensure XML is completely loaded before continuing
+     objXML.async = False
+     objXML.load(sTestDrop & "\\x86\\exec\momx_comp.xml")
+
+    Dim SuiteDict
+    Set SuiteDict = CreateObject("Scripting.Dictionary")
+    Set objSuiteNodes = objXML.documentElement.SelectNodes("testarea/suites/suite")
+    For Each objSuiteNode In objSuiteNodes 
+       If Not (SuiteDict.Exists(objSuiteNode.Text)) Then
+                SuiteDict.Add objSuiteNode.Text, objSuiteNode.Text
+       End If
+    Next
+    ' Convert into array
+    aSuites = SuiteDict.Items
+End Sub
+
+Public Function MakeInstallMOMXCustom(objTasklist, ByVal sProdBuild, ByVal sProdType, ByVal sProdLang, ByVal sVersion, ByVal sMOMXParms)
+' ---------------------------------------------------------------------------------------------------------
+'                                                                                                       
+'    This function will create commands to install Rosetta.                                           
+'                                                                                                       
+'    Parameters:                                                                                        
+'                                                                                                       
+'       objTasklist     The TASKLIST node object returned by MakeTasklist                           
+'       sProdBuild      Build number of MOMX to install
+'       sProdType       Type of MOMX to install
+'       sProdLang       Language of MOMX to install
+'       sVersion        MOMX component to installs
+'       sMOMXParms      MOMX Install Parameters
+'
+'    Returns:
+'        the TASK node object.                                                                      
+'
+' Note: This function does no error checking for valid inputs - it just passes them along to the appropriate
+'   standard install system. It assume that the Rosetta install script will return an appropriate error code If
+'   Rosetta install fails.                                                                                                       
+' ---------------------------------------------------------------------------------------------------------
+    Dim objTask
+    Dim aParms()
+    Redim aParms(5,1)
+
+    aParms(0,0) = "%build"
+    aParms(0,1) = sProdBuild
+    aParms(1,0) = "%type"
+    aParms(1,1) = sProdType
+    aParms(2,0) = "%language"
+    aParms(2,1) = sProdLang
+    aParms(4,0) = "%optional"
+    aParms(4,1) = sMOMXParms
+    
+    Select Case UCase(sVersion)
+        Case "DB_UI"
+            aParms(3,0) = "%version"
+            aParms(3,1) = "MOM_DB"
+            Set objTask = MakeStandardTask(objTasklist,"Install MOMX",aParms,"","","")
+            objTask.setAttribute "name", "MOMX Install - MOMX DB"
+            aParms(3,1) = "MOM_SERVER"
+            Set objTask = MakeStandardTask(objTasklist,"Install MOMX",aParms,"","","")
+            objTask.setAttribute "name", "MOMX Install - MOMX Server"
+        Case "COMPLETE"
+            aParms(3,0) = "%version"
+            aParms(3,1) = "COMPLETE"
+            Set objTask = MakeStandardTask(objTasklist,"Install MOMX",aParms,"","","")
+            objTask.setAttribute "name", "MOMX Install - MOMX Complete"
+        Case "COMPLETE_REPORTING"
+            aParms(3,0) = "%version"
+            aParms(3,1) = "COMPLETE"
+            Set objTask = MakeStandardTask(objTasklist,"Install MOMX",aParms,"","","")
+            objTask.setAttribute "name", "MOMX Install - MOMX Complete"
+            aParms(3,1) = "REPORTING"
+            Set objTask = MakeStandardTask(objTasklist,"Install MOMX",aParms,"","","")
+            objTask.setAttribute "name", "MOMX Install - MOMX Reporting"
+    End Select
+
+    Set MakeInstallMOMXCustom = objTask 
+End Function
+
+'GLENNLAV
+Public Function MakeInstallPrivateBinaries(objTasklist, ByVal sProdBuild, ByVal sPrivShare, ByVal sPrivFolder, ByVal sTargetPath)
+' ---------------------------------------------------------------------------------------------------------
+'                                                                                                       
+'    Replace one or more binaries at target path or sub-folders with equivalent stored on a remote share                                           
+'                                                                                                       
+'    Parameters:                                                                                        
+'                                                                                                       
+'       objTasklist     The TASKLIST node object returned by MakeTasklist                           
+'       sPrivShare      Share where private binaries are stored
+'       sPrivFolder     Folder where private binaries are stored
+'       sTargetPath     Path on machines to replace any found binaries
+'
+'    Returns:
+'        the TASK node object.                                                                      
+'
+' ---------------------------------------------------------------------------------------------------------
+    Const cPrivateInstallScript = "\\smx.net\tools\drop\PrivatesFiles.vbs"
+
+    Dim objTask
+    Dim sSetupCmd
+
+	' Install Privates on all machines
+	sSetupCmd = "cscript //nologo " & cPrivateInstallScript & " /privshare:" & sPrivShare& " /privfolder:" & sPrivFolder & " /target:" & sTargetPath
+
+	Set objTaskNode = MakeNewTask(objMachineTasklistNode, "Put private binaries on box",False,False,"","","")
+	Set objCommand = MakeNewCommand(objTaskNode, sSetupCmd, -2 * cFiveMinInSec, 0, "", "", "")
+	SetCommandOptions objCommand,cFiveMinInSec,cFiveMinInSec,False,3,60,0,False,1,""
+    
+    MakeInstallPrivateBinaries = objTask
+    
+End Function 
+
+Public Function MakeInstallMOMXFullb(objTasklist, ByVal sProdBuild, ByVal sProdType, ByVal sProdLang, ByVal sProdPath, ByVal bInstallMCF)
+' ---------------------------------------------------------------------------------------------------------
+'                                                                                                       
+'    This function will create commands to install Rosetta.                                           
+'                                                                                                       
+'    Parameters:                                                                                        
+'                                                                                                       
+'       objTasklist     The TASKLIST node object returned by MakeTasklist                           
+'       sProdBuild      Build number of MOMX to install - default is blessed
+'       sProdType       Type of MOMX to install - default is nonopt
+'       sProdPath       Path to MSI to install - default is official build
+'       sVersion        MOM component to install - default is complete (reporting
+'       bInstallMCF     Install MOMX MCF
+'
+'    Returns:
+'        the TASK node object.                                                                      
+'
+' Note: This function does no error checking for valid inputs - it just passes them along to the appropriate
+'   standard install system. It assume that the Rosetta install script will return an appropriate error code If
+'   Rosetta install fails.                                                                                                       
+' ---------------------------------------------------------------------------------------------------------
+Dim objTask
+Dim aParms()
+
+Const sMMPC = " /INSTALLMMPC"
+Const sMOMAccounts = " /DAS_USER:smx\momdas /ACTION_USER:smx\momactionact /TASK_USER:smx\momdts /REP_USER:smx\momdw"
+
+If (bInstallMCF) Then
+    ReDim aParms(5,1)
+    If (sProdPath <> Empty) Then
+        aParms(4,0) = "%optional"
+        aParms(4,1) = "/path:" & sProdPath
+        If (bInstallMCF) Then
+            aParms(4,1) = aParms(4,1) & sMMPC & sMOMAccounts
+        End If
+    Else
+        aParms(4,0) = "%optional"
+        aParms(4,1) = sMOMAccounts
+        If (bInstallMCF) Then
+            aParms(4,1) = aParms(4,1) & sMMPC
+        End If
+    End If
+Else
+    ReDim aParms(4,1)
+    If (sProdPath <> Empty) Then
+        ReDim aParms(5,1)
+        aParms(4,0) = "%optional"
+        aParms(4,1) = "/path:" & sProdPath & sMOMAccounts
+    End If
+End If
+
+aParms(0,0) = "%build"
+If (sProdBuild = Empty) Then
+   aParms(0,1) = "blessed"
+Else
+    aParms(0,1) = sProdBuild
+End If
+
+aParms(1,0) = "%type"
+If (sProdType = Empty) Then
+   aParms(1,1) = "nonopt"
+Else
+    aParms(1,1) = sProdType
+End If
+
+aParms(2,0) = "%language"
+If (sProdLang = Empty) Then
+   aParms(2,1) = "EN"
+Else
+    aParms(2,1) = sProdLang
+End If
+
+aParms(3,0) = "%version"
+aParms(3,1) = "complete"
+
+Set objTask = MakeStandardTask(objTasklist,"Install MOMX",aParms,"","","")
+objTask.setAttribute "name", "MOMX Install - Complete"
+
+aParms(3,1) = "reporting"
+
+Set objTask = MakeStandardTask(objTasklist,"Install MOMX",aParms,"","","")
+objTask.setAttribute "name", "MOMX Install - Reporting"
+
+Set MakeInstallMOMXFullb = objTask 
+
+End Function
+
+' GLENNLAV
+Function MakeInstallCoverageRuntime(objTasklist)
+' ---------------------------------------------------------------------------------------------------------
+'                                                                                                       
+'   Install the Magellan Coverage Runtime                                   
+'                                                                                                       
+'    Parameters:                                                                                        
+'                                                                                                       
+'       objTasklist     The TASKLIST node object returned by MakeTasklist                           
+'
+'    Returns:
+'        the TASK node object.                                                                      
+'
+' ---------------------------------------------------------------------------------------------------------
+	dim sSetupCmd
+	sSetupCmd = "cscript //nologo \\smx.net\tools\toolbox\magellan\Ver4.5\MagAutoInstall.vbs /Coverage Runtime"
+
+	dim objTaskNode, objCommand
+		
+	set objTaskNode = MakeNewTask(objTasklist, "Install Coverage Runtime",False,False,"","","")
+	set objCommand = MakeNewCommand(objTaskNode, sSetupCmd, -2 * cFiveMinInSec, 0, "", "", "")
+	SetCommandOptions objCommand,(-2 * cFiveMinInSec),0,false,10,60,0,false,1,""
+	
+	Set MakeInstallCoverageRuntime = objTaskNode
+	
+End Function
+
+' GLENNLAV
+Function MakeInstallCoverageRuntimeAll(objJob)
+' ---------------------------------------------------------------------------------------------------------
+'                                                                                                       
+'   Install the Magellan Coverage Runtime                                   
+'                                                                                                       
+'    Parameters:                                                                                        
+'                                                                                                       
+'       objTasklist     The TASKLIST node object returned by MakeTasklist                           
+'
+'    Returns:
+'        the TASK node object.                                                                      
+'
+' ---------------------------------------------------------------------------------------------------------
+	dim sSetupCmd
+	sSetupCmd = "cscript //nologo \\smx.net\tools\toolbox\magellan\Ver4.5\MagAutoInstall.vbs /Coverage Runtime"
+
+    Dim objMachineList, objMachine, objTasklist
+	dim objTaskNode, objCommand
+
+    Set objMachineList = objJob.selectNodes("MACHINE")
+    For Each objMachine In objMachineList
+        Set objTasklist = objMachine.selectSingleNode("TASKLIST")
+    	set objTaskNode = MakeNewTask(objTasklist, "Install Coverage Runtime",False,False,"","","")
+    	set objCommand = MakeNewCommand(objTaskNode, sSetupCmd, -2 * cFiveMinInSec, 0, "", "", "")
+    	SetCommandOptions objCommand,(-2 * cFiveMinInSec),0,false,10,60,0,false,1,""
+    Next
+
+	Set MakeInstallCoverageRuntimeAll = nothing
+	
+End Function
+
+
+
+' GLENNLAV
+Function MakeImportCoverageInfo(objTasklist, sTraceName)
+' ---------------------------------------------------------------------------------------------------------
+'                                                                                                       
+'    This function will create commands to install MOMX.                                           
+'                                                                                                       
+'    Parameters:                                                                                        
+'                                                                                                       
+'       objTasklist     The TASKLIST node object returned by MakeTasklist                           
+'       sTraceName      The trace name to save the coverage data under
+'
+'    Returns:
+'        the TASK node object.                                                                      
+'
+' ---------------------------------------------------------------------------------------------------------
+
+	' Install Privates on all machines
+	dim sSetupCmd
+	sSetupCmd = "\\smx.net\tools\toolbox\magellan\Ver4.5\coverageimport.bat " & sTraceName
+
+	dim objTaskNode, objCommand
+		
+	set objTaskNode = MakeNewTask(objTasklist, "Import coverage data for " & sTraceName,False,False,"","","")
+	set objCommand = MakeNewCommand(objTaskNode, sSetupCmd, -2 * cFiveMinInSec, 0, "", "", "")
+	SetCommandOptions objCommand,(-2 * cFiveMinInSec),0,false,3,60,"0,1",false,1,""
+	
+	Set MakeImportCoverageInfo = objTaskNode
+End Function
+
+
+
+
+' GLENNLAV
+Public Function MakeAVDetector(objTasklist, objTask, bTurnon)
+' ---------------------------------------------------------------------------------------------------------
+'                                                                                                       
+'    This function will turn on or off the AV Detector                                       
+'                                                                                                       
+'    Parameters:                                                                                        
+'                                                                                                       
+'       objTasklist     The TASKLIST node object returned by MakeTasklist                           
+'       objTask         The task to add the commands to. If Null a new task is created.             
+'       bTurnon         If true, turn on AV detection, otherwise turn off
+'       
+'
+'    Returns:
+'        the TASK node object.                                                                      
+'
+' ---------------------------------------------------------------------------------------------------------
+Dim objCommand
+    If Not IsObject(objTask) Then
+        Set objTask = MakeNewTask(objTasklist,"AV Detector",0,0,"","","")
+    End If
+    
+    Dim sCmd
+    If (bTurnon) Then
+        sCmd = "SetDebugOptions.wsf /Default"
+    Else
+        sCmd = "SetDebugOptions.wsf /Restore"
+    End if
+    
+    set objCommand = MakeNewCommand(objTask,sCmd, -1,-120,"","","")
+    SetCommandOptions objCommand,3600,-60,False,0,0,"0",False,0,""
+    
+    Set MakeAVDetector = objTask 
+End Function
+
+' GLENNLAV
+Public Function MakeAVDetectorAll(objJob, bTurnon)
+' ---------------------------------------------------------------------------------------------------------
+'                                                                                                       
+'    This function will turn on or off the AV Detector                                       
+'                                                                                                       
+'    Parameters:                                                                                        
+'                                                                                                       
+'       objTasklist     The Job node object                           
+'       bTurnon         If true, turn on AV detection, otherwise turn off
+'       
+'    Returns:
+'        the TASK node object.                                                                      
+'
+' ---------------------------------------------------------------------------------------------------------
+    Dim sCmd
+    If (bTurnon) Then
+        sCmd = "SetDebugOptions.wsf /Default"
+    Else
+        sCmd = "SetDebugOptions.wsf /Restore"
+    End If
+
+    Dim objMachineList, objMachine, objTasklist
+	dim objTaskNode, objCommand
+
+    Set objMachineList = objJob.selectNodes("MACHINE")
+    For Each objMachine In objMachineList
+        Set objTasklist = objMachine.selectSingleNode("TASKLIST")
+        Set objTaskNode = MakeNewTask(objTasklist,"AV Detector",0,0,"","","")
+        set objCommand = MakeNewCommand(objTaskNode,sCmd, -1,-120,"","","")
+        SetCommandOptions objCommand,3600,-60,False,0,0,"0",False,0,""
+    Next
+
+    Set MakeAVDetectorAll = Nothing 
+
+End Function
+
+
+' GLENNLAV
+Public Function MakeRunExecEngineEx(objTasklist,objTask,ByVal sProduct, ByVal sTestType, ByVal sConfig, ByVal sBuild, ByVal sSuite, ByVal sLogs, ByVal sTestPath, ByVal sCover, ByVal bExecMachine)
+' ---------------------------------------------------------------------------------------------------------
+'                                                                                                       
+'    This function will create commands to run tests using the execution engine.                                           
+'                                                                                                       
+'    Parameters:                                                                                        
+'                                                                                                       
+'       objTasklist     The TASKLIST node object returned by MakeTasklist                           
+'       objTask         The task to add the commands to. If Null a new task is created.             
+'       sProduct        Product being tested 
+'       sTestType       Level of tests to run (BVT, Smoke, Funcs)
+'       sConfig         Configuration of tests to run - if left blank, Exec Engine uses defaults
+'       sBuild          Build number to test On
+'       sLogs           Where you want test logs save (blank is nowhere)
+'       sTestPath       Where is the test drop located (blank is default, offical code)
+'       sCover          Trace name to save coverage results as (blank is no coverage results saved)
+'       bExecMachine    Is this the main 
+'
+'    Returns:
+'        the TASK node object.                                                                      
+'
+'
+' TO DO: Turn into standard task on Web Service - this becomes wrapper call
+' ---------------------------------------------------------------------------------------------------------
+Dim objCommand
+
+    If Not IsObject(objTask) Then
+        Set objTask = MakeNewTask(objTasklist,"Run Exec Engine: " & sProduct & "-" & sTestType,0,0,"","","")
+    End If
+    
+    if (bExecMachine) Then
+        ' Create the command line to run Exec Engine
+        dim sCmdLine
+        
+        If (sTestPath = Empty) Then
+            sCmdLine = "cscript \\smx.net\drop\" & sProduct & "\" & sBuild & "\x86\exec\exectest.vbs"
+        Else
+            sCmdLine = "cscript " & sTestPath & "\x86\exec\exectest.vbs"
+        End If
+
+        ' Put in mandatory parameters
+        sCmdLine = sCmdLine & " " & sProduct & " " & sTestType & " "
+        
+        dim sMachineSeparator, objMachineList, objMachine
+        sMachineSeparator = ""
+        ' Extract list of machines from job definition - put into Exec Engine
+        Dim sMachineList
+        sMachineList = Chr(34)
+        Set objMachineList = objTasklist.parentNode.parentNode.selectNodes("MACHINE")
+        For Each objMachine In objMachineList
+            sMachineList = sMachineList & sMachineSeparator & "%DITS_" & objMachine.getAttribute("machineid") & "%"
+            sMachineSeparator = ","
+        Next
+        sMachineList = sMachineList & Chr(34)
+        sCmdLine = sCmdLine & sMachineList
+        
+        ' Fill in all parameters 
+        sCmdLine = sCmdLine & " /build:" & sBuild
+        
+        if (sSuite <> Empty) then
+            sCmdLine = sCmdLine & " /suite:" & chr(34) & sSuite & chr(34)
+		end if         
+        
+        if (sConfig <> Empty) then
+            sCmdLine = sCmdLine & " /config:" & chr(34) & sConfig & chr(34)
+        end If
+
+        if (sLogs <> Empty) then
+            sCmdLine = sCmdLine & " /log:" & chr(34) & sLogs & chr(34)
+        end if
+        
+        If (sTestPath <> Empty) Then
+            sCmdLine = sCmdLine & " /droppoint:" & chr(34) & sTestPath & chr(34)
+        End If
+        
+        If (sCover <> Empty) Then
+            sCmdLine = sCmdLine & " /cover:" & chr(34) & sCover & chr(34)
+        End If
+        
+        set objCommand = MakeNewCommand(objTask,sCmdLine,-1,-120,"","","")
+        SetCommandOptions objCommand,0,0,False,0,0,"0",False,1,""
+        objCommand.setAttribute "interactive",true
+ 
+        Set objCommand = MakeNewCommand(objTask,"CScript.exe //nologo %DITS_Path%\ScanLogsEx.vbs %SYSTEMDRIVE%\" & sTestType & " " & sMachineList & " " & sProduct & " DITS",0,0,"","","")
+        SetCommandOptions objCommand,0,0,False,0,0,"0",False,1,""
+    end if
+
+    Set MakeRunExecEngineEx = objTask 
+
+End Function
+
+' GLENNLAV
+Public Function MakeInstallRosettab(objTasklist,objTask, ByVal sProdBuild)
+' ---------------------------------------------------------------------------------------------------------
+'                                                                                                       
+'    This function will create commands to install Rosetta.                                           
+'                                                                                                       
+'    Parameters:                                                                                        
+'                                                                                                       
+'       objTasklist     The TASKLIST node object returned by MakeTasklist                           
+'       objTask         The task to add the commands to. If Null a new task is created.             
+'       sProdBuild      Build number of Rosetta to install - default is blessed
+'
+'    Returns:
+'        the TASK node object.                                                                      
+'
+' Note: This function does no error checking for valid inputs - it just passes them along to the appropriate
+'   standard install system. It assume that the Rosetta install script will return an appropriate error code If
+'   Rosetta install fails.                                                                                                       
+' ---------------------------------------------------------------------------------------------------------
+Dim aParms()
+Redim aParms(0,1)
+aParms(0,0) = "%build"
+If (sProdBuild = Empty) Then
+    aParms(0,1) = "blessed"
+Else
+    aParms(0,1) = sProdBuild
+End If
+
+Set objTask = MakeStandardTask(objTasklist,"Install Rosetta",aParms,"","","")
+
+Set MakeInstallRosettab = objTask 
+
+End Function
+
+' ---------------------------------------------------------------------------------------------------------                               
+' Just show the usage and quit                                                                                                                                          
+' ---------------------------------------------------------------------------------------------------------
+sub Usage
+	WScript.Echo
+	WScript.Echo "cscript MOMX_Testing.wsf "
+    WScript.Echo
+    WScript.Echo " Arguments dealing execution of tests"
+	WScript.Echo "      /N:<alias1,alias2>"
+	WScript.Echo "      /Mach:<Machines to use for testing>"
+	WScript.Echo "      /OS:<OS required on test machines> - Only valid for distributed testing"
+    WScript.Echo " Arguments dealing with product under test"
+	WScript.Echo "      /B:<MOMX Build number>"
+	WScript.Echo "      /ProductPath:<Path to private version of product>"
+	WScript.Echo "      /ProductLang:<Language of product to install>"
+	WScript.Echo "      /ProductSKU:<SKU type of product to install>"
+	WScript.Echo "      /P:<Path to private product binaries>"
+    WScript.Echo " Arguments dealing with test configuration"
+    WScript.Echo "      /Tests:<Tests to run>"
+    WScript.Echo "      /Suites:<List of MOMX Test Suites>"
+    WScript.Echo "      /Config:<MOMX Test Config>"
+    WScript.Echo "      /TestPath:<Path to test drop>"
+    WScript.Echo "      /Testlogs:<Location>"
+    WScript.Echo " Arguments dealing DITS control"
+	WScript.Echo "      /Server:<Name of DITS server to submit job to>"
+	WScript.Echo "      /O:<Owner of the DITS job> "
+	WScript.Echo "      /N:<List of notification aliases>"
+	WScript.Echo "      /Desc:<Derscription for DITS job>"
+	WScript.Echo "      /Comments:<Comment about DITS job>"
+    WScript.Echo " Other control arguments"
+    WScript.Echo "      /nosql"
+    WScript.Echo "      /echo"
+    WScript.Echo "      /nofresh" 
+    WScript.Echo "      /coverage"
+    WScript.Echo "      /debugjob"
+    WScript.Echo
+    WScript.Echo " Arguments dealing execution of tests"
+	WScript.Echo "  /Mach:<Machines to use for testing>"
+	WScript.Echo "  Can have one of three input forms:"
+	WScript.Echo "       /mach:dist - distribute testing to any available machines in for public use"
+	WScript.Echo "       /mach:pool=<Pool name> - run machines on available machines from specified pool"
+	WScript.Echo "       /mach:<machine1,machine2,...> - comma delimited list of machines to run tests on. "
+	WScript.Echo "          Note: you must put in the same number of machines as tests require or will get error"
+	WScript.Echo "       Default: dist"
+    WScript.Echo
+	WScript.Echo "  /OS:<OS required on test machines>"
+    WScript.Echo "        Only valid if you put in /mach:dist (distributed testing)"
+    WScript.Echo "        Specify O/S that must be on machines"
+    WScript.Echo "        Valid Values: W2K (default), W2K3"
+    WScript.Echo
+    WScript.Echo " Arguments dealing with product under test"
+	WScript.Echo "  /B:<Build number of MOMX to test>"
+	WScript.Echo "        Default: latest"
+    WScript.Echo
+	WScript.Echo "  /ProductPath:<Path to private version of product>"
+	WScript.Echo "     Path to folder containing MSI for a private, full build of the product"
+	WScript.Echo "     NOTE: This flag will override any value entered for Build or Lang"
+	WScript.Echo "        Default: none - official product build used"
+    WScript.Echo
+	WScript.Echo "  /ProductLang:<Language of product to install>"
+	WScript.Echo "        Default: EN"
+    WScript.Echo
+	WScript.Echo "  /ProductSKU:<SKU (nonopt,retail,debug) of product to install>"
+	WScript.Echo "        Default: nonopt"
+	WScript.Echo
+	WScript.Echo "  /InstallMCF:<Install MOMX MCF (TRUE or FALSE)>"
+	WScript.Echo "        Default: TRUE"
+    WScript.Echo
+	WScript.Echo "  /MOMXVersion:<MOMX Install Type (DB_UI, COMPLETE_REPORTING,  or COMPLETE)>"
+	WScript.Echo "        Default: COMPLETE"
+    WScript.Echo
+	WScript.Echo "  /OPTIONALPARMS:<OPTIONAL>"
+	WScript.Echo "        Default: NONE"
+    WScript.Echo    
+	WScript.Echo "  /P:<Path to private product binaries>"
+	WScript.Echo "     Path to folder containing private versions of product binaries"
+	WScript.Echo "        Default: none - no private binaries installed"
+    WScript.Echo
+    WScript.Echo " Arguments dealing with test configuration"
+	WScript.Echo "  /Tests:<BVT, Smoke, Func> "
+	WScript.Echo "        Which type of tests you want to run"
+    WScript.Echo
+	WScript.Echo "  /Suites:<List of MOMX Test Suite> "
+	WScript.Echo "        Specify which test suites to run - comma seperated list"
+	WScript.Echo "        Default: [blank] - will run all suites"
+    WScript.Echo
+	WScript.Echo "  /Config:<MOMX Test Config> "
+	WScript.Echo "        Specify which configuraiton of MOMX BVT test are run"
+	WScript.Echo "        Default: [blank] - whatever execution engine uses for default"
+    WScript.Echo
+	WScript.Echo "  /TestPath:<Path to private version of test drop>"
+	WScript.Echo "     Path to folder containing private test code drop"
+    WScript.Echo
+	WScript.Echo "  /TestLogs:<Path to store result logs> "
+	WScript.Echo "        Specify where result logs shoudl be stored"
+	WScript.Echo "        Default: [blank] - whatever execution engine uses for default"
+	WScript.Echo
+    WScript.Echo " Arguments dealing DITS control"
+    WScript.Echo
+	WScript.Echo "  /Server:<Name of DITS server to submit job to>"
+	WScript.Echo "        Default: DITSTESTUI"
+    WScript.Echo
+	WScript.Echo "  /O:<Owner of the DITS job>"
+	WScript.Echo "        Default: Logged in user (can not be asttest)"
+    WScript.Echo
+	WScript.Echo "  /N:<List of notification aliases>"
+	WScript.Echo "      Comma-delimited list of aliases to send information to"
+	WScript.Echo "        Default: Logged in user (can not be asttest)"
+    WScript.Echo
+	WScript.Echo "  /Comments:<Comment about DITS job>"
+	WScript.Echo "      String that will be used as comment value for DITS jobs"
+	WScript.Echo "        Default: Empty string"
+    WScript.Echo
+	WScript.Echo "  /Desc:<Derscription for DITS job>"
+	WScript.Echo "      String that will be used as description value for DITS jobs"
+	WScript.Echo "        Default: Basic description given MOMX build number and if privates are being used"
+    WScript.Echo
+    WScript.Echo " Other control arguments"
+	WScript.Echo "  /nosql - flag to prevent installation of SQL and Rosetta on test boxes"
+	WScript.Echo
+	WScript.Echo "  /echo  - flag to set echo on for all script files run - useful for debugging"
+	WScript.Echo
+	WScript.Echo "  /norefresh - flag to prevent machines from refreshing at end of job"
+	WScript.Echo
+	WScript.Echo "  /coverage - should coverage runtime be installed and coverage information saved after tests are complete"
+	WScript.Echo
+	WScript.Echo "  /debugjob - flag to allow dumping of job XML to disk"
+	Wscript.Echo
+	WScript.Echo
+ end sub
+
+]]>
+		</script>
+	</job>
+</package>

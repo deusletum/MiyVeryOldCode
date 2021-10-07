@@ -1,0 +1,167 @@
+<!-- Copyright . 2004                                         -->
+<!--                                                                        -->
+<!-- Module : Base_Env.xml                                                  -->
+<!-- Summary: Designed to operate with OASIS 2.0 to execute a list of       -->
+<!--          actions after the testOS has finished installation            -->
+<!--                                                                        -->
+<!-- History: (08/10/2003) - Created                                        -->
+
+<product name="POPS2.0">
+<!--   ENTRY
+       Desc    : brief description of what the Action does
+       Action  : short name of Action - must be unique and in UCase
+                 (used to reference Entry in XML from a *.vbs/*.wsf file)
+       Reboot  : signifies whether a reboot is required/expected for Action
+                 (yes; no)
+           COMMAND
+           Key     : command file extension (cmd; bat; vbs; wsf; exe)
+           Value   : path to command file that will execute the Action
+               PARAMETER
+               Key       : list out individual parameters (for modification purposes)
+               Value     : parameters to feed into command file
+-->
+<entry enable="on" reboot="no"     action="ENABLE_IIS" desc="Starts and Enables IIS">
+    <command key="exe" value="sc.exe" errorchk="off">
+        <parameter key="param1" value="config"/>
+        <parameter key="param2" value="W3SVC"/>
+        <parameter key="param3" value="start= auto"/>
+    </command>
+    <command key="exe" value="net.exe" errorchk="off">
+        <parameter key="param1" value="start"/>
+        <parameter key="param2" value="W3SVC"/>
+    </command>
+</entry>
+
+<entry enable="on" reboot="no"     action="REG_ICF" desc="Disable the Internet Connection Firewall">
+   <command key="exe" value="reg.exe" errorchk="off">
+        <parameter key="param1" value="add"/>
+        <parameter key="param2" value="HKLM\SYSTEM\CurrentControlSet\Services\SharedAccess\Parameters\FwV4Policy\CorporateProfile"/>
+        <parameter key="param3" value="/v OperationalMode"/>
+        <parameter key="param4" value="/t REG_DWORD"/>
+        <parameter key="param5" value="/d 0"/>
+    </command>
+    <command key="exe" value="reg.exe" errorchk="off">
+        <parameter key="param1" value="add"/>
+        <parameter key="param2" value="HKLM\SYSTEM\CurrentControlSet\Services\SharedAccess\Parameters\FwV4Policy\OtherProfile"/>
+        <parameter key="param3" value="/v OperationalMode"/>
+        <parameter key="param4" value="/t REG_DWORD"/>
+        <parameter key="param5" value="/d 0"/>
+    </command>
+    <command key="exe" value="reg.exe" errorchk="off">
+        <parameter key="param1" value="add"/>
+        <parameter key="param2" value="HKLM\SYSTEM\CurrentControlSet\Services\SharedAccess\Parameters\FirewallPolicy\DomainProfile"/>
+        <parameter key="param3" value="/v EnableFirewall"/>
+        <parameter key="param4" value="/t REG_DWORD"/>
+        <parameter key="param5" value="/d 0"/>
+        <parameter key="param6" value="/f"/>
+    </command>
+</entry>
+
+<entry enable="on" reboot="no"     action="REG_IEHARDENING" desc="Disable the IE Hardening pop-up">
+    <command key="exe" value="regedit.exe">
+        <parameter key="param1" value="-s"/>
+        <parameter key="param2" value="%TOOLSRV%\pops\regs\iehardening.reg"/>
+    </command>
+</entry>
+
+<entry enable="on" reboot="no"     action="ADDADMIN" desc="Add User to Admin Group">
+    <command key="vbs" value="%TOOLSRV%\bricktools\common\admins.vbs">
+        <parameter key="param1" value="%DOMAIN%"/>
+        <parameter key="pwrite" value="asttest-1"/>
+        <parameter key="param3" value="/add"/>
+    </command>
+</entry>
+
+<entry enable="on" reboot="no"     action="LOGON" desc="Set AutoLogon Info">
+    <command key="exe" value="%TOOLSRV%\drop\Autologon.cmd" errorchk="off">
+        <parameter key="pwrite" value=""/>
+        <parameter key="param1" value="%DOMAIN%"/>
+    </command>
+</entry>
+
+<!-- Create a local user for DITS and make it an admin -->
+<entry enable="on" reboot="no"     action="DITSUSER" desc="Creates DITS User">
+    <command key="exe" value="net" errorchk="off">
+        <parameter key="pwrite" value="user"/>
+        <parameter key="param1" value="DITS"/>
+        <parameter key="param2" value="SMX#2001"/>
+        <parameter key="param3" value="/ADD"/>
+    </command>
+</entry>
+
+<entry enable="on" reboot="no"     action="ADDDITSADMIN" desc="Add DITS User to Admin Group">
+    <command key="vbs" value="%TOOLSRV%\bricktools\common\admins.vbs">
+        <parameter key="param1" value="%COMPUTERNAME%"/>
+        <parameter key="pwrite" value="DITS-1"/>
+        <parameter key="param3" value="/add"/>
+    </command>
+</entry>
+
+
+<entry enable="on" reboot="no"     action="MSMQ" desc="Configure MSMQ">
+    <command key="cmd" value="%TOOLSRV%\drop\msmq_config.cmd" errorchk="off"/>
+</entry>
+<!-- Create a local user for DITS and make it an admin -->
+
+<!--  **REBOOT**  -->
+<entry enable="on" reboot="yes"    action="RBT" desc="Clean up Boot.ini and Force Reboot">
+    <command key="vbs" value="%TOOLSRV%\bricktools\common\boot.vbs">
+        <parameter key="param1" value="/time:10"/>
+        <parameter key="param2" value="/reboot"/>
+    </command>
+</entry>
+
+<entry enable="on"  reboot="no"    action="URTSDK" desc="Install NET 1.1 SDK">
+    <command key="cmd" value="%TOOLSRV%\drop\inst_URT.cmd">
+        <parameter key="pwrite" value=""/>
+    </command>
+</entry>
+
+<!--  **REBOOT**  -->
+<entry enable="on" reboot="yes"    action="RBT2" desc="Clean up Boot.ini and Force Reboot">
+    <command key="vbs" value="%TOOLSRV%\bricktools\common\boot.vbs">
+        <parameter key="param1" value="/time:10"/>
+        <parameter key="param2" value="/reboot"/>
+    </command>
+</entry>
+
+<entry enable="on" reboot="no"     action="POPS" desc="Run POPS">
+    <command key="vbs" value="%TOOLSRV%\pops\pops.vbs">
+        <parameter key="pwrite" value=""/>
+    </command>
+</entry>
+
+<entry enable="on" reboot="no"     action="PATRON_IN" desc="Check-In machine to ML3 using Patron">
+    <command key="vbs" value="%TOOLSRV%\bricktools\common\librarypatron.vbs" errorchk="off">
+        <parameter key="param1" value="Add"/>
+        <parameter key="param2" value="SMXOASIS"/>
+        <parameter key="param3" value='""'/>
+        <parameter key="param4" value='""'/>
+    </command>
+    <command key="vbs" value="%TOOLSRV%\bricktools\common\librarypatron.vbs" errorchk="off">
+        <parameter key="param1" value="CheckIn"/>
+        <parameter key="param2" value="SMXOASIS"/>
+    </command>
+</entry>
+
+<entry enable="on" reboot="no"     action="DITS_RESUME" desc="Resume any DITS job on hold">
+    <command key="wsf" value="%TOOLSRV%\bricktools\common\ResumeDITS.wsf" errorchk="off"/>
+</entry>
+
+<entry enable="on" reboot="no"     action="VIDEO" desc="Ensure default video monitor settings">
+    <command key="exe" value="%TOOLSRV%\bricktools\%PROCESSOR_ARCHITECTURE%\chres.exe" errorchk="off">
+        <parameter key="param1" value="/W:1024"/>
+        <parameter key="param2" value="/H:768"/>
+        <parameter key="param3" value="/C:16"/>
+        <parameter key="param4" value="/F:70"/>
+    </command>
+</entry>
+
+<entry enable="on" reboot="no"     action="BACKGROUND" desc="Set background information">
+    <command key="cmd" value="%TOOLSRV%\bricktools\common\background.cmd" errorchk="off"/>
+</entry>
+
+<entry enable="on" reboot="no"     action="REMOTECMD" desc="Start a remote command window">
+    <command key="cmd" value="%TOOLSRV%\bricktools\common\remotecmd.cmd" errorchk="off"/>
+</entry>
+</product>

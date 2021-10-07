@@ -1,0 +1,15 @@
+C:\Users\Dean\Desktop\Exercise\NewNumeralConverter\NewNumeralConverter\bin\Debug\NewNumeralConverter.dll
+C:\Users\Dean\Desktop\Exercise\NewNumeralConverter\NewNumeralConverter\bin\Debug\NewNumeralConverter.pdb
+C:\Users\Dean\Desktop\Exercise\NewNumeralConverter\NewNumeralConverter\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\Dean\Desktop\Exercise\NewNumeralConverter\NewNumeralConverter\obj\Debug\NewNumeralConverter.dll
+C:\Users\Dean\Desktop\Exercise\NewNumeralConverter\NewNumeralConverter\obj\Debug\NewNumeralConverter.pdb
+C:\Users\Dean\Dropbox\Dev\Exercise\NewNumeralConverter\NewNumeralConverter\bin\Debug\NewNumeralConverter.dll
+C:\Users\Dean\Dropbox\Dev\Exercise\NewNumeralConverter\NewNumeralConverter\bin\Debug\NewNumeralConverter.pdb
+C:\Users\Dean\Dropbox\Dev\Exercise\NewNumeralConverter\NewNumeralConverter\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\Dean\Dropbox\Dev\Exercise\NewNumeralConverter\NewNumeralConverter\obj\Debug\NewNumeralConverter.dll
+C:\Users\Dean\Dropbox\Dev\Exercise\NewNumeralConverter\NewNumeralConverter\obj\Debug\NewNumeralConverter.pdb
+C:\Users\Dean\Dropbox\Dev\Exercise\NumeralConverter-Test\NewNumeralConverter\NewNumeralConverter\bin\Debug\NewNumeralConverter.dll
+C:\Users\Dean\Dropbox\Dev\Exercise\NumeralConverter-Test\NewNumeralConverter\NewNumeralConverter\bin\Debug\NewNumeralConverter.pdb
+C:\Users\Dean\Dropbox\Dev\Exercise\NumeralConverter-Test\NewNumeralConverter\NewNumeralConverter\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\Dean\Dropbox\Dev\Exercise\NumeralConverter-Test\NewNumeralConverter\NewNumeralConverter\obj\Debug\NewNumeralConverter.dll
+C:\Users\Dean\Dropbox\Dev\Exercise\NumeralConverter-Test\NewNumeralConverter\NewNumeralConverter\obj\Debug\NewNumeralConverter.pdb

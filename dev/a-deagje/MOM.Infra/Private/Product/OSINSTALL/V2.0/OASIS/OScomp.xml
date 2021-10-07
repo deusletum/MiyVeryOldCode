@@ -1,0 +1,379 @@
+<!-- Copyright . 2004                                         -->
+<!--                                                                        -->
+<!-- Module : OSComp.xml                                                    -->
+<!-- Summary: Designed to operate with OASIS 2.0 to control addition of     -->
+<!--          components and modifications to the unattend.txt file         -->
+<!--                                                                        -->
+<!-- History: (08/10/2003) Jennla - Initial coding                          -->
+<!--          (04/28/2004) deangj - updated compaq 5i drivers bug # 3426    -->
+<!--          (05/04/2004) Jheat  - updated PNP Path                        -->
+<!--          (07/26/2004) PKong  - Add support for Promise FastTrak TX2    -->
+<!--                                array controller                        -->
+
+<product name="OScomp">
+<!--   HEADER
+       Name    : name of the header of each segment in the unattend.txt file
+           ENTRY
+           Enable  : whether to turn on/off the component entry
+                     (off will remove the entry from unattend.txt and resort to O/S default)
+           Key     : name of the component entry
+           Value   : value for the component entry
+               SUB     - other components current Entry is dependent on
+               Name    : name of the header dependent component is located under
+               Key     : name of the component entry
+               Value   : value for the component entry
+-->
+
+<header name="Branding">
+    <entry enable="always"    key="BrandIEUsingUnattended" value="Yes"/>
+</header>
+
+<header name="Data">
+    <entry enable="off"       key="AutoPartition" value="1"/>
+    <entry enable="always"    key="MsDosInitiated" value="0"/>
+    <entry enable="always"    key="UnattendedInstall" value="Yes"/>
+</header>
+
+<header name="GuiRunOnce">
+<!-- enable if running POPS -->
+    <entry enable="off"       key="Command0" value=""/>
+    <entry enable="off"       key="Command1" value=""/>
+</header>
+
+<header name="GuiUnattended">
+    <entry enable="off"       key="AdminPassword" value=""/>
+    <entry enable="always"    key="AutoLogon" value="Yes"/>
+    <entry enable="off"       key="AutoLogonCount" value="1"/>
+    <entry enable="always"    key="OEMSkipRegional" value="1"/>
+    <entry enable="always"    key="OEMSkipWelcome" value="1"/>
+    <entry enable="always"    key="TimeZone" value="4"/>
+</header>
+
+<header name="Identification">
+<!-- enable if creating Workgroup -->
+    <entry enable="off"       key="JoinWorkGroup" value=""/>
+
+<!-- enable if joining Domain -->
+    <entry enable="off"       key="CreateComputerAccountInDomain" value=""/>
+    <entry enable="off"       key="DomainAdmin" value=""/>
+    <entry enable="off"       key="DomainAdminPassword" value=""/>
+    <entry enable="off"       key="JoinDomain" value=""/>
+    <entry enable="off"       key="MachineObjectOU" value=""/>
+</header>
+
+<header name="IEHardening">
+<!-- fill in with testOS name and server sites -->
+    <entry enable="always"    key="LocalIntranetSites" value=""/>
+</header>
+
+<header name="LicenseFilePrintData">
+    <entry enable="always"    key="AutoMode" value="PerServer"/>
+    <entry enable="always"    key="AutoUsers" value="2500"/>
+</header>
+
+<header name="Networking">
+    <entry enable="always"    key="InstallDefaultComponents" value="Yes"/>
+</header>
+
+<header name="Proxy">
+    <entry enable="always"    key="HTTP_Proxy_Server" value="http://itgproxy:80"/>
+    <entry enable="always"    key="Proxy_Enable" value="1"/>
+    <entry enable="always"    key="Proxy_Override" value="&lt;local&gt;"/>
+    <entry enable="always"    key="Use_Same_Proxy" value="1"/>
+</header>
+
+<header name="Quicklink">
+    <entry enable="always"    key="Quick_Link_1" value='"http://SMXTEST"'/>
+    <entry enable="always"    key="Quick_Link_1_Name" value='"Server Manage Test Home Page"'/>
+</header>
+
+<header name="RegionalSettings">
+    <entry enable="off"       key="InputLocale" value=""/>
+    <entry enable="off"       key="LanguageGroup" value=""/>
+</header>
+
+<header name="TapiLocation">
+    <entry enable="always"    key="AreaCode" value="425"/>
+    <entry enable="always"    key="Dialing" value="Tone"/>
+    <entry enable="always"    key="LongDistanceAccess" value='"9,"'/>
+</header>
+
+<header name="Unattended">
+    <entry enable="always"    key="ConfirmHardware" value="No"/>
+    <entry enable="always"    key="Driversigningpolicy" value="Ignore"/>
+    <entry enable="always"    key="Filesystem" value="LeaveAlone"/>
+    <entry enable="always"    key="OEMPnPDriversPath" value='"PnpDrvs\AUDIO\adi;PnpDrvs\AUDIO\adi198x_dell;PnpDrvs\AUDIO\adi198x_hp;PnpDrvs\CHIPSET\intel;PnpDrvs\NIC\3csoho100;PnpDrvs\NIC\3csoho100b;PnpDrvs\NIC\bcm57xx;PnpDrvs\NIC\fa31x;PnpDrvs\NIC\intel100;PnpDrvs\NIC\intel1000;PnpDrvs\NIC\nc67xx77xx;PnpDrvs\VIDEO\atirageiic;PnpDrvs\VIDEO\intel3ddirect;PnpDrvs\VIDEO\intelextreme;PnpDrvs\VIDEO\nvidia"'/>
+    <entry enable="always"    key="OEMSkipEula" value="Yes"/>
+    <entry enable="always"    key="TargetPath" value="WINNT"/>
+    <entry enable="always"    key="UnattendMode" value="FullUnattended"/>
+    <entry enable="always"    key="Win31Upgrade" value="No"/>
+    <entry enable="off"       key="NtUpgrade" value=""/>
+    <entry enable="off"       key="OEMPreinstall" value=""/>
+    <entry enable="off"       key="OverwriteOEMFilesOnUpgrade" value=""/>
+</header>
+
+<header name="Display">
+    <entry enable="always"    key="BitsPerPel" value="16"/>
+    <entry enable="always"    key="Vrefresh" value="70"/>
+    <entry enable="always"    key="XResolution" value="1024"/>
+    <entry enable="always"    key="YResolution" value="768"/>
+</header>
+
+<header name="MassStorageDrivers">
+<!-- enable if ID5i or Perc2 drive array -->
+    <!-- Compaq 5i 5300 6400 -->
+    <entry enable="off"       key='"Smart Array 5300 Controller"' value='"OEM"' />
+    <entry enable="off"       key='"Smart Array 5i, 532, 5312 Controllers"' value='"OEM"' />
+    <entry enable="off"       key='"Smart Array 641, 642, 6400, 6400EM Controllers"' value='"OEM"' />
+    <!-- Dell Perc 2 -->
+    <entry enable="off"       key='"Dell PERC 2, 2/Si, 3/Si, 3/Di RAID Controllers"' value='"OEM"'/>
+    <!-- Dell Perc 4 -->
+    <entry enable="off"       key='"DELL PERC 4/Di RAID Driver for Windows 2000 "' value='"OEM"' />
+    <entry enable="off"       key='"DELL PERC 4/Di RAID On Motherboard Driver"' value='"OEM"' />
+    <!-- Promise TX2 -->
+    <entry enable="off"       key='"Promise FastTrak100 (tm) LP/TX2/TX4 Controller"' value='"OEM"' />
+    <!-- Generic IDE CDROM -->
+    <entry enable="off"       key='"IDE CD-ROM (ATAPI 1.2)/PCI IDE Controller"' value='"RETAIL"' />
+</header>
+
+<header name="OEMBootFiles">
+<!-- enable if ID5i or Perc2 drive array -->
+    <entry enable="off"       key="TXTSETUP.OEM" value=""/>
+    <!-- Compaq 5i 5300 6400 -->
+    <entry enable="off"       key="cpqcissm.dll" value=""/>
+    <entry enable="off"       key="cpqcissm.cat" value=""/>
+    <entry enable="off"       key="cpqcissm.inf" value=""/>
+    <entry enable="off"       key="CpqCissm.sys" value=""/>
+    <!-- Dell Perc 2 -->
+    <entry enable="off"       key="PERC2.SYS" value=""/>
+    <entry enable="off"       key="PERC2HIB.SYS" value=""/>
+    <!-- Dell Perc 4 -->
+    <entry enable="off"       key="mraid2k.cat" value=""/>
+    <entry enable="off"       key="MRAID2K.sys" value=""/>
+    <entry enable="off"       key="mraid35x.cat" value=""/>
+    <entry enable="off"       key="Mraid35x.sys" value=""/>
+    <entry enable="off"       key="nodev.inf" value=""/>
+    <entry enable="off"       key="oemsetup.inf" value=""/>
+    <!-- Promise TX2 -->
+    <entry enable="off"       key="FASTTRAK.CAT" value=""/>
+    <entry enable="off"       key="fasttrak.inf" value=""/>
+    <entry enable="off"       key="fasttrak.sys" value=""/>
+</header>
+
+<header name="URL">
+    <entry enable="always"    key="AutoConfig" value="1"/>
+    <entry enable="always"    key="Home_Page" value='"http://www.microsoft.com/"'/>
+</header>
+
+<header name="UserData">
+    <entry enable="always"    key="FullName" value='"Server Manager Team"'/>
+    <entry enable="always"    key="OrgName" value="Microsoft"/>
+    <entry enable="off"       key="ComputerName" value=""/>
+    <entry enable="off"       key="ProductID" value=""/>
+</header>
+
+<header name="NetOptionalComponents">
+<!-- enable based on OSCOMP input...default is all off -->
+    <entry enable="off"   key="ACS" value="1">
+        <sub  name="Components"    key="netoc" value="on"/>
+    </entry>
+    <entry enable="off"   key="DHCPServer" value="1">
+        <sub  name="Components"    key="netoc" value="on"/>
+    </entry>
+    <entry enable="off"   key="DNS" value="1">
+        <sub  name="Components"    key="netoc" value="on"/>
+    </entry>
+    <entry enable="off"   key="IAS" value="1">
+        <sub  name="Components"    key="netoc" value="on"/>
+    </entry>
+    <entry enable="off"   key="ILS" value="1">
+        <sub  name="Components"    key="iis_common" value="on"/>
+        <sub  name="Components"    key="iis_inetmgr" value="on"/>
+        <sub  name="Components"    key="iis_www" value="on"/>
+        <sub  name="Components"    key="netoc" value="on"/>
+    </entry>
+    <entry enable="off"   key="LPDSVC" value="1">
+        <sub  name="Components"    key="netoc" value="on"/>
+    </entry>
+    <entry enable="off"   key="MacPrint" value="1">
+        <sub  name="Components"    key="netoc" value="on"/>
+    </entry>
+    <entry enable="off"   key="MacSrv" value="1">
+        <sub  name="Components"    key="netoc" value="on"/>
+    </entry>
+    <entry enable="off"   key="Netcm" value="1">
+        <sub  name="Components"    key="iis_common" value="on"/>
+        <sub  name="Components"    key="iis_ftp" value="on"/>
+        <sub  name="Components"    key="iis_inetmgr" value="on"/>
+        <sub  name="Components"    key="iis_www" value="on"/>
+        <sub  name="Components"    key="netoc" value="on"/>
+    </entry>
+    <entry enable="off"   key="NETMONTOOLS" value="1">
+        <sub  name="Components"    key="netoc" value="on"/>
+    </entry>
+    <entry enable="off"   key="SimpTcp" value="1">
+        <sub  name="Components"    key="netoc" value="on"/>
+    </entry>
+    <entry enable="off"   key="SNMP" value="1">
+        <sub  name="Components"    key="netoc" value="on"/>
+    </entry>
+    <entry enable="off"   key="WINS" value="1">
+        <sub  name="Components"    key="netoc" value="on"/>
+    </entry>
+</header>
+
+<header name="Components">
+<!-- enable based on OSCOMP input...default is all off -->
+    <entry enable="off"   key="accessopt" value="on"/>
+    <entry enable="off"   key="aspnet" value="on"/>
+    <entry enable="off"   key="BitsServerExtensionsISAPI" value="on"/>
+    <entry enable="off"   key="BitsServerExtensionsManager" value="on"/>
+    <entry enable="off"   key="certsrv" value="on"/>
+    <entry enable="off"   key="fp_extensions" value="on">
+        <sub  name="Components"    key="iis_common" value="on"/>
+        <sub  name="Components"    key="iis_inetmgr" value="on"/>
+        <sub  name="Components"    key="iis_www" value="on"/>
+    </entry>
+    <entry enable="off"   key="fp_vdir_deploy" value="on">
+        <sub  name="Components"    key="fp_extensions" value="on"/>
+        <sub  name="Components"    key="iis_common" value="on"/>
+        <sub  name="Components"    key="iis_inetmgr" value="on"/>
+        <sub  name="Components"    key="iis_www" value="on"/>
+    </entry>
+    <entry enable="off"   key="hypertrm" value="on"/>
+    <entry enable="off"   key="iehardenadmin" value="off">
+        <sub  name="Components"    key="iehardenuser" value="off"/>
+    </entry>
+    <entry enable="off"   key="iehardenuser" value="off">
+        <sub  name="Components"    key="iehardenadmin" value="off"/>
+    </entry>
+
+    <entry enable="off"   key="iis_common" value="on"/>
+    <entry enable="off"   key="iis_ftp" value="on">
+        <sub  name="Components"    key="iis_common" value="on"/>
+        <sub  name="Components"    key="iis_inetmgr" value="on"/>
+    </entry>
+    <entry enable="off"   key="iis_inetmgr" value="on">
+        <sub  name="Components"    key="iis_common" value="on"/>
+    </entry>
+    <entry enable="off"   key="iis_nntp" value="on">
+        <sub  name="Components"    key="iis_common" value="on"/>
+        <sub  name="Components"    key="iis_inetmgr" value="on"/>
+        <sub  name="Components"    key="iis_www" value="on"/>
+    </entry>
+    <entry enable="off"   key="iis_nntp_docs" value="on">
+        <sub  name="Components"    key="iis_common" value="on"/>
+        <sub  name="Components"    key="iis_inetmgr" value="on"/>
+        <sub  name="Components"    key="iis_www" value="on"/>
+    </entry>
+    <entry enable="off"   key="iis_pwmgr" value="on">
+        <sub  name="Components"    key="iis_common" value="on"/>
+        <sub  name="Components"    key="iis_inetmgr" value="on"/>
+        <sub  name="Components"    key="iis_www" value="on"/>
+    </entry>
+    <entry enable="off"   key="iis_smtp" value="on">
+        <sub  name="Components"    key="iis_common" value="on"/>
+        <sub  name="Components"    key="iis_inetmgr" value="on"/>
+        <sub  name="Components"    key="iis_www" value="on"/>
+    </entry>
+    <entry enable="off"   key="iis_smtp_docs" value="on">
+        <sub  name="Components"    key="iis_common" value="on"/>
+        <sub  name="Components"    key="iis_inetmgr" value="on"/>
+        <sub  name="Components"    key="iis_www" value="on"/>
+    </entry>
+    <entry enable="off"   key="iis_www" value="on">
+        <sub  name="Components"    key="iis_common" value="on"/>
+        <sub  name="Components"    key="iis_inetmgr" value="on"/>
+    </entry>
+    <entry enable="off"   key="iis_www_vdir_printers" value="on">
+        <sub  name="Components"    key="iis_common" value="on"/>
+        <sub  name="Components"    key="iis_inetmgr" value="on"/>
+        <sub  name="Components"    key="iis_www" value="on"/>
+    </entry>
+    <entry enable="off"   key="iis_www_vdir_terminalservices" value="on">
+        <sub  name="Components"    key="iis_common" value="on"/>
+        <sub  name="Components"    key="iis_inetmgr" value="on"/>
+        <sub  name="Components"    key="iis_www" value="on"/>
+    </entry>
+    <entry enable="off"   key="iisdbg" value="on"/>
+
+    <entry enable="off"   key="indexsrv_system" value="on">
+        <sub  name="Components"    key="iis_common" value="on"/>
+        <sub  name="Components"    key="iis_inetmgr" value="on"/>
+        <sub  name="Components"    key="iis_www" value="on"/>
+    </entry>
+    <entry enable="off"   key="licenseserver" value="on"/>
+    <entry enable="off"   key="indexsrv_system" value="on">
+        <sub  name="Components"    key="iis_common" value="on"/>
+        <sub  name="Components"    key="iis_inetmgr" value="on"/>
+        <sub  name="Components"    key="iis_www" value="on"/>
+    </entry>
+
+    <entry enable="off"   key="msmq_ADIntegrated" value="on">
+        <sub  name="Components"    key="msmq_Core" value="on"/>
+        <sub  name="Components"    key="msmq_LocalStorage" value="on"/>
+    </entry>
+    <entry enable="off"   key="msmq" value="on"/>
+    <entry enable="off"   key="msmq_Core" value="on"/>
+    <entry enable="off"   key="msmq_HTTPSupport" value="on">
+        <sub  name="Components"    key="iis_common" value="on"/>
+        <sub  name="Components"    key="iis_inetmgr" value="on"/>
+        <sub  name="Components"    key="iis_www" value="on"/>
+        <sub  name="Components"    key="msmq_Core" value="on"/>
+        <sub  name="Components"    key="msmq_LocalStorage" value="on"/>
+    </entry>
+    <entry enable="off"   key="msmq_LocalStorage" value="on">
+        <sub  name="Components"    key="msmq_Core" value="on"/>
+    </entry>
+    <entry enable="off"   key="msmq_MQDSService" value="on">
+        <sub  name="Components"    key="msmq_ADIntegrated" value="on"/>
+        <sub  name="Components"    key="msmq_Core" value="on"/>
+        <sub  name="Components"    key="msmq_LocalStorage" value="on"/>
+    </entry>
+    <entry enable="off"   key="msmq_RoutingSupport" value="on">
+        <sub  name="Components"    key="msmq_ADIntegrated" value="on"/>
+        <sub  name="Components"    key="msmq_Core" value="on"/>
+        <sub  name="Components"    key="msmq_LocalStorage" value="on"/>
+    </entry>
+    <entry enable="off"   key="msmq_TriggersService" value="on">
+        <sub  name="Components"    key="msmq_Core" value="on"/>
+        <sub  name="Components"    key="msmq_LocalStorage" value="on"/>
+    </entry>
+
+    <entry enable="off"   key="netcis" value="on">
+        <sub  name="Components"    key="iis_common" value="on"/>
+        <sub  name="Components"    key="iis_inetmgr" value="on"/>
+        <sub  name="Components"    key="iis_www" value="on"/>
+    </entry>
+    <entry enable="off"   key="netoc" value="on"/>
+    <entry enable="off"   key="objectpkg" value="on"/>
+    <entry enable="off"   key="reminst" value="on"/>
+
+    <entry enable="off"   key="TSEnable" value="on">
+        <sub  name="TerminalServices"    key="AllowConnections" value="1"/>
+        <sub  name="TerminalServices"    key="Applicationserver" value="0"/>
+        <sub  name="TerminalServices"    key="PermissionsSetting" value="0"/>
+    </entry>
+    <entry enable="off"   key="TSClients" value="on"/>
+    <entry enable="off"   key="TSWebClient" value="on">
+        <sub  name="Components"    key="iis_common" value="on"/>
+        <sub  name="Components"    key="iis_inetmgr" value="on"/>
+        <sub  name="Components"    key="iis_www" value="on"/>
+    </entry>
+
+    <entry enable="off"   key="wbemmsi" value="on"/>
+    <entry enable="off"   key="wms" value="on"/>
+    <entry enable="off"   key="wms_admin_asp" value="on">
+        <sub  name="Components"    key="iis_common" value="on"/>
+        <sub  name="Components"    key="wms" value="on"/>
+    </entry>
+    <entry enable="off"   key="wms_admin_mmc" value="on">
+        <sub  name="Components"    key="wms" value="on"/>
+    </entry>
+    <entry enable="off"   key="wms_server" value="on">
+        <sub  name="Components"    key="wms" value="on"/>
+        <sub  name="Components"    key="wms_admin_mmc" value="on"/>
+    </entry>
+</header>
+
+</product>

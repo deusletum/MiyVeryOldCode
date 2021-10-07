@@ -1,0 +1,82 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>MCopy</name>
+    </assembly>
+    <members>
+        <!-- Badly formed XML comment ignored for member "T:MCopy.CopyFiles" -->
+        <member name="F:MCopy.CopyFiles.fArray">
+            <summary>
+             fArray is the Source files with full path.
+            </summary>
+        </member>
+        <member name="F:MCopy.CopyFiles.fArrayDest">
+            <summary>
+            fArrayDest is the Destination Directory path.
+            </summary>
+        </member>
+        <member name="M:MCopy.CopyFiles.FillSourceArray(System.String,System.String)">
+            <summary>
+            This method uses Recursion to fill fArray with Source Directory and file full Path
+            </summary>
+            <param name="Source">Source Directory, passed in as args[0] for class start</param>
+            <param name="Dest">Destination Directory, passed in as args[1] for class start</param>
+        </member>
+        <member name="M:MCopy.CopyFiles.FillDestArray(System.String,System.String)">
+            <summary>
+            This method uses Recursion to fill fArrayDest with Destination Directory full Path to
+            perserve path information when coping files
+            </summary>
+            <param name="Source">Source Directory, passed in as args[0] for class start</param>
+            <param name="Dest">Destination Directory, passed in as args[1] for class start</param>
+        </member>
+        <member name="M:MCopy.CopyFiles.CopyOne">
+            <summary>
+            This method takes the first 1/4 of fArray and fArrayDest and uses them to copy files.
+            </summary>
+        </member>
+        <member name="M:MCopy.CopyFiles.CopyTwo">
+            <summary>
+            This method takes the Second 1/4 of fArray and fArrayDest and uses them to copy files.
+            </summary>
+        </member>
+        <member name="M:MCopy.CopyFiles.CopyThree">
+            <summary>
+            This method takes the Third 1/4 of fArray and fArrayDest and uses them to copy files.
+            </summary>
+        </member>
+        <member name="M:MCopy.CopyFiles.CopyFour">
+            <summary>
+            This method takes the forth 1/4 of fArray and fArrayDest and uses them to copy files.
+            </summary>
+        </member>
+        <member name="P:MCopy.CopyFiles.SourceDir">
+            <summary>
+             Property for holding the string value for the Source Directory
+            </summary>
+        </member>
+        <member name="P:MCopy.CopyFiles.DestDir">
+            <summary>
+            Property for holding the string value for the Destination Directory
+            </summary>
+        </member>
+        <member name="P:MCopy.CopyFiles.OverRide">
+            <summary>
+            Property for holding the bool value for the Over writing files
+            in the Destination Directory
+            </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "T:MCopy.Start" -->
+        <member name="M:MCopy.Start.Main(System.String[])">
+            <summary>
+            The main entry point for the application.
+            </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "T:MCopy.usage" -->
+        <member name="M:MCopy.usage.DisplayUage">
+            <summary>
+            Displays Usage Information
+            </summary>
+        </member>
+    </members>
+</doc>

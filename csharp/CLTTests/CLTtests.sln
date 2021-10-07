@@ -1,0 +1,21 @@
+Microsoft Visual Studio Solution File, Format Version 8.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CLTtests", "CLTtests.csproj", "{077C515F-0B9C-4088-B5F4-792BB644D443}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfiguration) = preSolution
+		Debug = Debug
+		Release = Release
+	EndGlobalSection
+	GlobalSection(ProjectConfiguration) = postSolution
+		{077C515F-0B9C-4088-B5F4-792BB644D443}.Debug.ActiveCfg = Debug|.NET
+		{077C515F-0B9C-4088-B5F4-792BB644D443}.Debug.Build.0 = Debug|.NET
+		{077C515F-0B9C-4088-B5F4-792BB644D443}.Release.ActiveCfg = Release|.NET
+		{077C515F-0B9C-4088-B5F4-792BB644D443}.Release.Build.0 = Release|.NET
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+	EndGlobalSection
+	GlobalSection(ExtensibilityAddIns) = postSolution
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,1 @@
+\\acstools\drop\Inst_MOMX.vbs /build:2263 /type:nonopt /dbinstance:instance1 /das_user:smx\momdas /action_user:smx\momactionact /i

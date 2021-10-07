@@ -1,0 +1,13 @@
+﻿<root>
+<MACHINE name="SMOMFUNC01" owner="deangj" location="small lab" 
+mfg="Compaq" model="Evo D500" type="AT/AT COMPATIBLE" processortype="0" 
+cpu="1894" processorcount="1" ram="536" hd="40015" estimated="0">
+<DESCRIPTION></DESCRIPTION>
+<NOTES>[Not Specified]</NOTES>
+<DISKDEVICE name="\\.\PHYSICALDRIVE0" size="40015" 
+manufacturer="(Lecteurs de disque standard)" model="ST340016A">
+<DISK letter="C:" status="Do not use" space="4288" />
+<DISK letter="D:" status="Reformat" space="14019" />
+</DISKDEVICE>
+</MACHINE>
+</root>

@@ -1,0 +1,1767 @@
+"DeployProject"
+{
+"VSVersion" = "3:700"
+"ProjectType" = "8:{5443560c-dbb4-11d2-8724-00a0c9a8b90c}"
+"IsWebType" = "8:FALSE"
+"ProjectName" = "8:MSDE Admin"
+"LanguageId" = "3:1033"
+"CodePage" = "3:1252"
+"UILanguageId" = "3:1033"
+"SccProjectName" = "8:"
+"SccLocalPath" = "8:"
+"SccAuxPath" = "8:"
+"SccProvider" = "8:"
+    "Hierarchy"
+    {
+        "Entry"
+        {
+        "MsmKey" = "8:_05E8D439F4FC4BB2AED305FB7B21CA91"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:C:\\DOCUMENTS AND SETTINGS\\A-DEANGJ\\MY DOCUMENTS\\MSDEADMIN\\SUPPORT\\OLEAUT32.DLL"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_0690DFCA96F24200AB80E57EA6A21583"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:C:\\DOCUMENTS AND SETTINGS\\A-DEANGJ\\MY DOCUMENTS\\MSDEADMIN\\SUPPORT\\VB6STKIT.DLL"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_1089A7B1D22D4DD7ADDF20E04445E7CC"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:C:\\PROGRAM FILES\\MICROSOFT SQL SERVER\\80\\TOOLS\\BINN\\SEMNT.DLL"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_12A39DD069444D589329865E61525B33"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:C:\\PROGRAM FILES\\MICROSOFT SQL SERVER\\80\\TOOLS\\BINN\\SEMMAP.DLL"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_13907A75D880427FA204906BC38D6DFD"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:C:\\PROGRAM FILES\\MICROSOFT SQL SERVER\\80\\TOOLS\\BINN\\RESOURCES\\1033\\SQLNS.RLL"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_1E25CA36C9B54C2EA0B15836BFBF3450"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:C:\\PROGRAM FILES\\MICROSOFT SQL SERVER\\80\\TOOLS\\BINN\\RESOURCES\\1033\\SEMSYS.RLL"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_2BC711AB31354254B68E0EEA3DEA2B0E"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:C:\\PROGRAM FILES\\MICROSOFT SQL SERVER\\80\\TOOLS\\BINN\\SEMDLL.DLL"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_341B5F8D67DD4F3AB98113C31AF680D5"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:C:\\PROGRAM FILES\\MICROSOFT SQL SERVER\\80\\TOOLS\\BINN\\RESOURCES\\1033\\SQLGUI.RLL"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_34DE3D5ECDD7496C8DFD3B8CFA6722D7"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:C:\\PROGRAM FILES\\MICROSOFT SQL SERVER\\80\\TOOLS\\BINN\\SEMDTS.DLL"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_42217E94519C46D89D93231E58DE2F7E"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:C:\\PROGRAM FILES\\MICROSOFT SQL SERVER\\80\\TOOLS\\BINN\\SEMOBJ.DLL"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_427C5D1FA0E947A0B98B78F39615DB65"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:C:\\DOCUMENTS AND SETTINGS\\A-DEANGJ\\MY DOCUMENTS\\MSDEADMIN\\SUPPORT\\RICHTX32.OCX"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_4A7670484F774C379F53557739B3937D"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:C:\\PROGRAM FILES\\MICROSOFT SQL SERVER\\80\\TOOLS\\BINN\\SEMSYS.DLL"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_502074493DF147E69195FEBE8AFD6BF6"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:C:\\DOCUMENTS AND SETTINGS\\A-DEANGJ\\MY DOCUMENTS\\MSDEADMIN\\SUPPORT\\SQLUNIRL.DLL"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_5A6776324CE34F9CBE0D72FE57F29533"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:C:\\DOCUMENTS AND SETTINGS\\A-DEANGJ\\MY DOCUMENTS\\MSDEADMIN\\SUPPORT\\MSVBVM60.DLL"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_5C1B1A6E7C93432DA0384B1E9B283D9B"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:C:\\PROGRAM FILES\\MICROSOFT SQL SERVER\\80\\TOOLS\\BINN\\SQLGUI.DLL"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_5D45D433F5B74A239CE5F1B1B9CD7CD9"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:C:\\PROGRAM FILES\\MICROSOFT SQL SERVER\\80\\TOOLS\\BINN\\SEMREPL.DLL"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_648FB67B1C9B4C45843A40FCCD578A73"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:C:\\PROGRAM FILES\\MICROSOFT SQL SERVER\\80\\TOOLS\\BINN\\RESOURCES\\1033\\SEMWIZ.RLL"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_67C5CE98FDC246FAA6A48CAB22686603"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:C:\\PROGRAM FILES\\MICROSOFT SQL SERVER\\80\\TOOLS\\BINN\\RESOURCES\\1033\\SEMOBJ.RLL"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_698D0F27A4204065A314AA000AABD832"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:C:\\PROGRAM FILES\\MICROSOFT SQL SERVER\\80\\TOOLS\\BINN\\SEMEXEC.DLL"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_73D6CB7126254071A57DBB69BF53C40A"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:C:\\PROGRAM FILES\\MICROSOFT SQL SERVER\\80\\TOOLS\\BINN\\RESOURCES\\1033\\SEMCROS.RLL"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_79E74354C6E146788290D1051332298E"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:C:\\DOCUMENTS AND SETTINGS\\A-DEANGJ\\MY DOCUMENTS\\MSDEADMIN\\SUPPORT\\OLEPRO32.DLL"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_7A711C80B1C046DF939DAACDB5E7C705"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:C:\\PROGRAM FILES\\MICROSOFT SQL SERVER\\80\\TOOLS\\BINN\\RESOURCES\\1033\\SEMMAP.RLL"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_9E875658293748E5A1A927BB8AAD23F3"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:C:\\PROGRAM FILES\\MICROSOFT SQL SERVER\\80\\TOOLS\\BINN\\SEMSFC.DLL"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_B1C06D6FD27744FEB3C4951F69FE3ABA"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:C:\\PROGRAM FILES\\MICROSOFT SQL SERVER\\80\\TOOLS\\BINN\\RESOURCES\\1033\\SEMDLL.RLL"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_B63169ECEDA44CFAAA4093F4D178C4F0"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:C:\\DOCUMENTS AND SETTINGS\\A-DEANGJ\\MY DOCUMENTS\\MSDEADMIN\\SUPPORT\\MSCOMCTL.OCX"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_BB1D1EB7AD9746DA8481C87681A393D4"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:C:\\PROGRAM FILES\\MICROSOFT SQL SERVER\\80\\TOOLS\\BINN\\SEMCROS.DLL"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_C3FDED3D7AC04E9793F87E8D3C5F14BA"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:C:\\PROGRAM FILES\\MICROSOFT SQL SERVER\\80\\TOOLS\\BINN\\RESOURCES\\1033\\SEMWEBWZ.RLL"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_C7ED6BE6C7884237BC19DA520D7065B8"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:C:\\PROGRAM FILES\\MICROSOFT SQL SERVER\\80\\TOOLS\\BINN\\RESOURCES\\1033\\SEMCOMN.RLL"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_CA8200DB4EF34F8B832A285383B25FF8"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:C:\\DOCUMENTS AND SETTINGS\\A-DEANGJ\\MY DOCUMENTS\\MSDEADMIN\\SUPPORT\\MSDEADMIN.EXE"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_D2F428B0DE2B4003BFB4C769032A5BE1"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:C:\\DOCUMENTS AND SETTINGS\\A-DEANGJ\\MY DOCUMENTS\\MSDEADMIN\\SUPPORT\\RICHED32.DLL"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_D43BFAE4313C4D6F8600DAD11263CBD6"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:C:\\PROGRAM FILES\\MICROSOFT SQL SERVER\\80\\TOOLS\\BINN\\SEMCOMN.DLL"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_D44E3A6D4A5B4BDDB10FB1B50F7C40F0"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:C:\\PROGRAM FILES\\MICROSOFT SQL SERVER\\80\\TOOLS\\BINN\\RESOURCES\\1033\\SEMREPL.RLL"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_D61D464638A7439688980FEE54F1728D"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:C:\\DOCUMENTS AND SETTINGS\\A-DEANGJ\\MY DOCUMENTS\\MSDEADMIN\\SUPPORT\\COMCAT.DLL"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_DC24A9F33251440784649C7192AA93B4"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:C:\\PROGRAM FILES\\MICROSOFT SQL SERVER\\80\\TOOLS\\BINN\\SQLNS.DLL"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_E4D14BC481E44ECD913D70F27F85A774"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:C:\\PROGRAM FILES\\MICROSOFT SQL SERVER\\80\\TOOLS\\BINN\\SEMWIZ.DLL"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_E5F4006F0379495783A15A330164E212"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:C:\\PROGRAM FILES\\MICROSOFT SQL SERVER\\80\\TOOLS\\BINN\\RESOURCES\\1033\\SEMNT.RLL"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_E64A9E61CC494AECB821DFC89F743A51"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:C:\\PROGRAM FILES\\MICROSOFT SQL SERVER\\80\\TOOLS\\BINN\\SEMWEBWZ.DLL"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_E66BF6F7B4E84424B39F28F223B30ABB"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:C:\\PROGRAM FILES\\MICROSOFT SQL SERVER\\80\\TOOLS\\BINN\\RESOURCES\\1033\\SEMSFC.RLL"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_E9C370E0EB4C4A6CA3DF7C5A78DC58BD"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:C:\\PROGRAM FILES\\MICROSOFT SQL SERVER\\80\\TOOLS\\BINN\\SQLLEX.DLL"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_FB69DE16DEA4420A8CDB4765C8ECB6BE"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:C:\\PROGRAM FILES\\MICROSOFT SQL SERVER\\80\\TOOLS\\BINN\\RESOURCES\\1033\\SEMEXEC.RLL"
+        }
+    }
+    "Configurations"
+    {
+        "Debug"
+        {
+        "DisplayName" = "8:Debug"
+        "IsDebugOnly" = "11:TRUE"
+        "IsReleaseOnly" = "11:FALSE"
+        "OutputFilename" = "8:..\\MSDE Admin\\Debug\\MSDE Admin.msi"
+        "PackageFilesAs" = "3:2"
+        "PackageFileSize" = "3:-2147483648"
+        "CabType" = "3:1"
+        "Compression" = "3:2"
+        "SignOutput" = "11:FALSE"
+        "CertificateFile" = "8:"
+        "PrivateKeyFile" = "8:"
+        "TimeStampServer" = "8:"
+        "InstallerBootstrapper" = "3:2"
+        }
+        "Release"
+        {
+        "DisplayName" = "8:Release"
+        "IsDebugOnly" = "11:FALSE"
+        "IsReleaseOnly" = "11:TRUE"
+        "OutputFilename" = "8:..\\MSDE Admin\\Release\\MSDE Admin.msi"
+        "PackageFilesAs" = "3:2"
+        "PackageFileSize" = "3:-2147483648"
+        "CabType" = "3:1"
+        "Compression" = "3:2"
+        "SignOutput" = "11:FALSE"
+        "CertificateFile" = "8:"
+        "PrivateKeyFile" = "8:"
+        "TimeStampServer" = "8:"
+        "InstallerBootstrapper" = "3:2"
+        }
+    }
+    "Deployable"
+    {
+        "CustomAction"
+        {
+        }
+        "DefaultFeature"
+        {
+        "Name" = "8:DefaultFeature"
+        "Title" = "8:"
+        "Description" = "8:"
+        }
+        "Feature"
+        {
+        }
+        "File"
+        {
+            "{54DA9790-1474-11D3-8E00-00C04F6837D0}:_05E8D439F4FC4BB2AED305FB7B21CA91"
+            {
+            "SourcePath" = "8:..\\..\\MSDEAdmin\\Support\\OLEAUT32.DLL"
+            "TargetName" = "8:OLEAUT32.DLL"
+            "Tag" = "8:"
+            "Folder" = "8:_F7F049FA2F5146BC853001A849546DD9"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{54DA9790-1474-11D3-8E00-00C04F6837D0}:_0690DFCA96F24200AB80E57EA6A21583"
+            {
+            "SourcePath" = "8:..\\..\\MSDEAdmin\\Support\\VB6STKIT.DLL"
+            "TargetName" = "8:VB6STKIT.DLL"
+            "Tag" = "8:"
+            "Folder" = "8:_F7F049FA2F5146BC853001A849546DD9"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{54DA9790-1474-11D3-8E00-00C04F6837D0}:_1089A7B1D22D4DD7ADDF20E04445E7CC"
+            {
+            "SourcePath" = "8:C:\\Program Files\\Microsoft SQL Server\\80\\Tools\\Binn\\semnt.dll"
+            "TargetName" = "8:semnt.dll"
+            "Tag" = "8:"
+            "Folder" = "8:_E2A2A544481143058D3A16CE9214AC30"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{54DA9790-1474-11D3-8E00-00C04F6837D0}:_12A39DD069444D589329865E61525B33"
+            {
+            "SourcePath" = "8:C:\\Program Files\\Microsoft SQL Server\\80\\Tools\\Binn\\semmap.dll"
+            "TargetName" = "8:semmap.dll"
+            "Tag" = "8:"
+            "Folder" = "8:_E2A2A544481143058D3A16CE9214AC30"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{54DA9790-1474-11D3-8E00-00C04F6837D0}:_13907A75D880427FA204906BC38D6DFD"
+            {
+            "SourcePath" = "8:C:\\Program Files\\Microsoft SQL Server\\80\\Tools\\Binn\\Resources\\1033\\sqlns.rll"
+            "TargetName" = "8:sqlns.rll"
+            "Tag" = "8:"
+            "Folder" = "8:_008C9AB44CA74D028A92E4C9F5A9B628"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{54DA9790-1474-11D3-8E00-00C04F6837D0}:_1E25CA36C9B54C2EA0B15836BFBF3450"
+            {
+            "SourcePath" = "8:C:\\Program Files\\Microsoft SQL Server\\80\\Tools\\Binn\\Resources\\1033\\semsys.rll"
+            "TargetName" = "8:semsys.rll"
+            "Tag" = "8:"
+            "Folder" = "8:_008C9AB44CA74D028A92E4C9F5A9B628"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{54DA9790-1474-11D3-8E00-00C04F6837D0}:_2BC711AB31354254B68E0EEA3DEA2B0E"
+            {
+            "SourcePath" = "8:C:\\Program Files\\Microsoft SQL Server\\80\\Tools\\Binn\\semdll.dll"
+            "TargetName" = "8:semdll.dll"
+            "Tag" = "8:"
+            "Folder" = "8:_E2A2A544481143058D3A16CE9214AC30"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{54DA9790-1474-11D3-8E00-00C04F6837D0}:_341B5F8D67DD4F3AB98113C31AF680D5"
+            {
+            "SourcePath" = "8:C:\\Program Files\\Microsoft SQL Server\\80\\Tools\\Binn\\Resources\\1033\\sqlgui.rll"
+            "TargetName" = "8:sqlgui.rll"
+            "Tag" = "8:"
+            "Folder" = "8:_008C9AB44CA74D028A92E4C9F5A9B628"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{54DA9790-1474-11D3-8E00-00C04F6837D0}:_34DE3D5ECDD7496C8DFD3B8CFA6722D7"
+            {
+            "SourcePath" = "8:C:\\Program Files\\Microsoft SQL Server\\80\\Tools\\Binn\\semdts.dll"
+            "TargetName" = "8:semdts.dll"
+            "Tag" = "8:"
+            "Folder" = "8:_E2A2A544481143058D3A16CE9214AC30"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{54DA9790-1474-11D3-8E00-00C04F6837D0}:_42217E94519C46D89D93231E58DE2F7E"
+            {
+            "SourcePath" = "8:C:\\Program Files\\Microsoft SQL Server\\80\\Tools\\Binn\\semobj.dll"
+            "TargetName" = "8:semobj.dll"
+            "Tag" = "8:"
+            "Folder" = "8:_E2A2A544481143058D3A16CE9214AC30"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{54DA9790-1474-11D3-8E00-00C04F6837D0}:_427C5D1FA0E947A0B98B78F39615DB65"
+            {
+            "SourcePath" = "8:..\\..\\MSDEAdmin\\Support\\RICHTX32.OCX"
+            "TargetName" = "8:RICHTX32.OCX"
+            "Tag" = "8:"
+            "Folder" = "8:_455F73DB836140C884B3F6723E3E40F2"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:4"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{54DA9790-1474-11D3-8E00-00C04F6837D0}:_4A7670484F774C379F53557739B3937D"
+            {
+            "SourcePath" = "8:C:\\Program Files\\Microsoft SQL Server\\80\\Tools\\Binn\\semsys.dll"
+            "TargetName" = "8:semsys.dll"
+            "Tag" = "8:"
+            "Folder" = "8:_E2A2A544481143058D3A16CE9214AC30"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{54DA9790-1474-11D3-8E00-00C04F6837D0}:_502074493DF147E69195FEBE8AFD6BF6"
+            {
+            "SourcePath" = "8:..\\..\\MSDEAdmin\\Support\\sqlunirl.dll"
+            "TargetName" = "8:sqlunirl.dll"
+            "Tag" = "8:"
+            "Folder" = "8:_455F73DB836140C884B3F6723E3E40F2"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{54DA9790-1474-11D3-8E00-00C04F6837D0}:_5A6776324CE34F9CBE0D72FE57F29533"
+            {
+            "SourcePath" = "8:..\\..\\MSDEAdmin\\Support\\msvbvm60.dll"
+            "TargetName" = "8:msvbvm60.dll"
+            "Tag" = "8:"
+            "Folder" = "8:_F7F049FA2F5146BC853001A849546DD9"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:4"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{54DA9790-1474-11D3-8E00-00C04F6837D0}:_5C1B1A6E7C93432DA0384B1E9B283D9B"
+            {
+            "SourcePath" = "8:C:\\Program Files\\Microsoft SQL Server\\80\\Tools\\Binn\\sqlgui.dll"
+            "TargetName" = "8:sqlgui.dll"
+            "Tag" = "8:"
+            "Folder" = "8:_E2A2A544481143058D3A16CE9214AC30"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{54DA9790-1474-11D3-8E00-00C04F6837D0}:_5D45D433F5B74A239CE5F1B1B9CD7CD9"
+            {
+            "SourcePath" = "8:C:\\Program Files\\Microsoft SQL Server\\80\\Tools\\Binn\\semrepl.dll"
+            "TargetName" = "8:semrepl.dll"
+            "Tag" = "8:"
+            "Folder" = "8:_E2A2A544481143058D3A16CE9214AC30"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{54DA9790-1474-11D3-8E00-00C04F6837D0}:_648FB67B1C9B4C45843A40FCCD578A73"
+            {
+            "SourcePath" = "8:C:\\Program Files\\Microsoft SQL Server\\80\\Tools\\Binn\\Resources\\1033\\semwiz.rll"
+            "TargetName" = "8:semwiz.rll"
+            "Tag" = "8:"
+            "Folder" = "8:_008C9AB44CA74D028A92E4C9F5A9B628"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{54DA9790-1474-11D3-8E00-00C04F6837D0}:_67C5CE98FDC246FAA6A48CAB22686603"
+            {
+            "SourcePath" = "8:C:\\Program Files\\Microsoft SQL Server\\80\\Tools\\Binn\\Resources\\1033\\semobj.rll"
+            "TargetName" = "8:semobj.rll"
+            "Tag" = "8:"
+            "Folder" = "8:_008C9AB44CA74D028A92E4C9F5A9B628"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{54DA9790-1474-11D3-8E00-00C04F6837D0}:_698D0F27A4204065A314AA000AABD832"
+            {
+            "SourcePath" = "8:C:\\Program Files\\Microsoft SQL Server\\80\\Tools\\Binn\\semexec.dll"
+            "TargetName" = "8:semexec.dll"
+            "Tag" = "8:"
+            "Folder" = "8:_E2A2A544481143058D3A16CE9214AC30"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{54DA9790-1474-11D3-8E00-00C04F6837D0}:_73D6CB7126254071A57DBB69BF53C40A"
+            {
+            "SourcePath" = "8:C:\\Program Files\\Microsoft SQL Server\\80\\Tools\\Binn\\Resources\\1033\\semcros.rll"
+            "TargetName" = "8:semcros.rll"
+            "Tag" = "8:"
+            "Folder" = "8:_008C9AB44CA74D028A92E4C9F5A9B628"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{54DA9790-1474-11D3-8E00-00C04F6837D0}:_79E74354C6E146788290D1051332298E"
+            {
+            "SourcePath" = "8:..\\..\\MSDEAdmin\\Support\\OLEPRO32.DLL"
+            "TargetName" = "8:OLEPRO32.DLL"
+            "Tag" = "8:"
+            "Folder" = "8:_F7F049FA2F5146BC853001A849546DD9"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:4"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{54DA9790-1474-11D3-8E00-00C04F6837D0}:_7A711C80B1C046DF939DAACDB5E7C705"
+            {
+            "SourcePath" = "8:C:\\Program Files\\Microsoft SQL Server\\80\\Tools\\Binn\\Resources\\1033\\semmap.rll"
+            "TargetName" = "8:semmap.rll"
+            "Tag" = "8:"
+            "Folder" = "8:_008C9AB44CA74D028A92E4C9F5A9B628"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{54DA9790-1474-11D3-8E00-00C04F6837D0}:_9E875658293748E5A1A927BB8AAD23F3"
+            {
+            "SourcePath" = "8:C:\\Program Files\\Microsoft SQL Server\\80\\Tools\\Binn\\semsfc.dll"
+            "TargetName" = "8:semsfc.dll"
+            "Tag" = "8:"
+            "Folder" = "8:_E2A2A544481143058D3A16CE9214AC30"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{54DA9790-1474-11D3-8E00-00C04F6837D0}:_B1C06D6FD27744FEB3C4951F69FE3ABA"
+            {
+            "SourcePath" = "8:C:\\Program Files\\Microsoft SQL Server\\80\\Tools\\Binn\\Resources\\1033\\semdll.rll"
+            "TargetName" = "8:semdll.rll"
+            "Tag" = "8:"
+            "Folder" = "8:_008C9AB44CA74D028A92E4C9F5A9B628"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{54DA9790-1474-11D3-8E00-00C04F6837D0}:_B63169ECEDA44CFAAA4093F4D178C4F0"
+            {
+            "SourcePath" = "8:..\\..\\MSDEAdmin\\Support\\mscomctl.ocx"
+            "TargetName" = "8:mscomctl.ocx"
+            "Tag" = "8:"
+            "Folder" = "8:_455F73DB836140C884B3F6723E3E40F2"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:4"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{54DA9790-1474-11D3-8E00-00C04F6837D0}:_BB1D1EB7AD9746DA8481C87681A393D4"
+            {
+            "SourcePath" = "8:C:\\Program Files\\Microsoft SQL Server\\80\\Tools\\Binn\\semcros.dll"
+            "TargetName" = "8:semcros.dll"
+            "Tag" = "8:"
+            "Folder" = "8:_E2A2A544481143058D3A16CE9214AC30"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{54DA9790-1474-11D3-8E00-00C04F6837D0}:_C3FDED3D7AC04E9793F87E8D3C5F14BA"
+            {
+            "SourcePath" = "8:C:\\Program Files\\Microsoft SQL Server\\80\\Tools\\Binn\\Resources\\1033\\semwebwz.rll"
+            "TargetName" = "8:semwebwz.rll"
+            "Tag" = "8:"
+            "Folder" = "8:_008C9AB44CA74D028A92E4C9F5A9B628"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{54DA9790-1474-11D3-8E00-00C04F6837D0}:_C7ED6BE6C7884237BC19DA520D7065B8"
+            {
+            "SourcePath" = "8:C:\\Program Files\\Microsoft SQL Server\\80\\Tools\\Binn\\Resources\\1033\\semcomn.rll"
+            "TargetName" = "8:semcomn.rll"
+            "Tag" = "8:"
+            "Folder" = "8:_008C9AB44CA74D028A92E4C9F5A9B628"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{54DA9790-1474-11D3-8E00-00C04F6837D0}:_CA8200DB4EF34F8B832A285383B25FF8"
+            {
+            "SourcePath" = "8:..\\..\\MSDEAdmin\\Support\\MSDEAdmin.exe"
+            "TargetName" = "8:MSDEAdmin.exe"
+            "Tag" = "8:"
+            "Folder" = "8:_F7F049FA2F5146BC853001A849546DD9"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{54DA9790-1474-11D3-8E00-00C04F6837D0}:_D2F428B0DE2B4003BFB4C769032A5BE1"
+            {
+            "SourcePath" = "8:..\\..\\MSDEAdmin\\Support\\RICHED32.DLL"
+            "TargetName" = "8:RICHED32.DLL"
+            "Tag" = "8:"
+            "Folder" = "8:_F7F049FA2F5146BC853001A849546DD9"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{54DA9790-1474-11D3-8E00-00C04F6837D0}:_D43BFAE4313C4D6F8600DAD11263CBD6"
+            {
+            "SourcePath" = "8:C:\\Program Files\\Microsoft SQL Server\\80\\Tools\\Binn\\semcomn.dll"
+            "TargetName" = "8:semcomn.dll"
+            "Tag" = "8:"
+            "Folder" = "8:_E2A2A544481143058D3A16CE9214AC30"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{54DA9790-1474-11D3-8E00-00C04F6837D0}:_D44E3A6D4A5B4BDDB10FB1B50F7C40F0"
+            {
+            "SourcePath" = "8:C:\\Program Files\\Microsoft SQL Server\\80\\Tools\\Binn\\Resources\\1033\\semrepl.rll"
+            "TargetName" = "8:semrepl.rll"
+            "Tag" = "8:"
+            "Folder" = "8:_008C9AB44CA74D028A92E4C9F5A9B628"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{54DA9790-1474-11D3-8E00-00C04F6837D0}:_D61D464638A7439688980FEE54F1728D"
+            {
+            "SourcePath" = "8:..\\..\\MSDEAdmin\\Support\\COMCAT.DLL"
+            "TargetName" = "8:COMCAT.DLL"
+            "Tag" = "8:"
+            "Folder" = "8:_F7F049FA2F5146BC853001A849546DD9"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{54DA9790-1474-11D3-8E00-00C04F6837D0}:_DC24A9F33251440784649C7192AA93B4"
+            {
+            "SourcePath" = "8:C:\\Program Files\\Microsoft SQL Server\\80\\Tools\\Binn\\sqlns.dll"
+            "TargetName" = "8:sqlns.dll"
+            "Tag" = "8:"
+            "Folder" = "8:_E2A2A544481143058D3A16CE9214AC30"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:4"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{54DA9790-1474-11D3-8E00-00C04F6837D0}:_E4D14BC481E44ECD913D70F27F85A774"
+            {
+            "SourcePath" = "8:C:\\Program Files\\Microsoft SQL Server\\80\\Tools\\Binn\\semwiz.dll"
+            "TargetName" = "8:semwiz.dll"
+            "Tag" = "8:"
+            "Folder" = "8:_E2A2A544481143058D3A16CE9214AC30"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{54DA9790-1474-11D3-8E00-00C04F6837D0}:_E5F4006F0379495783A15A330164E212"
+            {
+            "SourcePath" = "8:C:\\Program Files\\Microsoft SQL Server\\80\\Tools\\Binn\\Resources\\1033\\semnt.rll"
+            "TargetName" = "8:semnt.rll"
+            "Tag" = "8:"
+            "Folder" = "8:_008C9AB44CA74D028A92E4C9F5A9B628"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{54DA9790-1474-11D3-8E00-00C04F6837D0}:_E64A9E61CC494AECB821DFC89F743A51"
+            {
+            "SourcePath" = "8:C:\\Program Files\\Microsoft SQL Server\\80\\Tools\\Binn\\semwebwz.dll"
+            "TargetName" = "8:semwebwz.dll"
+            "Tag" = "8:"
+            "Folder" = "8:_E2A2A544481143058D3A16CE9214AC30"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{54DA9790-1474-11D3-8E00-00C04F6837D0}:_E66BF6F7B4E84424B39F28F223B30ABB"
+            {
+            "SourcePath" = "8:C:\\Program Files\\Microsoft SQL Server\\80\\Tools\\Binn\\Resources\\1033\\semsfc.rll"
+            "TargetName" = "8:semsfc.rll"
+            "Tag" = "8:"
+            "Folder" = "8:_008C9AB44CA74D028A92E4C9F5A9B628"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{54DA9790-1474-11D3-8E00-00C04F6837D0}:_E9C370E0EB4C4A6CA3DF7C5A78DC58BD"
+            {
+            "SourcePath" = "8:C:\\Program Files\\Microsoft SQL Server\\80\\Tools\\Binn\\sqllex.dll"
+            "TargetName" = "8:sqllex.dll"
+            "Tag" = "8:"
+            "Folder" = "8:_E2A2A544481143058D3A16CE9214AC30"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:4"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{54DA9790-1474-11D3-8E00-00C04F6837D0}:_FB69DE16DEA4420A8CDB4765C8ECB6BE"
+            {
+            "SourcePath" = "8:C:\\Program Files\\Microsoft SQL Server\\80\\Tools\\Binn\\Resources\\1033\\semexec.rll"
+            "TargetName" = "8:semexec.rll"
+            "Tag" = "8:"
+            "Folder" = "8:_008C9AB44CA74D028A92E4C9F5A9B628"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+        }
+        "FileType"
+        {
+        }
+        "Folder"
+        {
+            "{777C097F-0ED8-11D3-8D6C-00A0C9CFCEE6}:_328EE8E553BB48269B726CA106F136BE"
+            {
+            "Name" = "8:#1912"
+            "AlwaysCreate" = "11:FALSE"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Property" = "8:ProgramFilesFolder"
+                "Folders"
+                {
+                    "{461E96AF-1495-11D3-8D6C-00A0C9CFCEE6}:_2597FEA9CB7C49C2BC4B6B345BED172F"
+                    {
+                    "Name" = "8:Microsoft SQL Server"
+                    "AlwaysCreate" = "11:FALSE"
+                    "Condition" = "8:"
+                    "Transitive" = "11:FALSE"
+                    "Property" = "8:_008199FF45D9439EAF2889A00655A0FA"
+                        "Folders"
+                        {
+                            "{461E96AF-1495-11D3-8D6C-00A0C9CFCEE6}:_F15D1AD590904A85AB070ED947DF12C1"
+                            {
+                            "Name" = "8:80"
+                            "AlwaysCreate" = "11:FALSE"
+                            "Condition" = "8:"
+                            "Transitive" = "11:FALSE"
+                            "Property" = "8:_F7A60A8F08984E66BF5C5AE29D67E982"
+                                "Folders"
+                                {
+                                    "{461E96AF-1495-11D3-8D6C-00A0C9CFCEE6}:_9E48BAE0C6EF4EE08262204C1846D51E"
+                                    {
+                                    "Name" = "8:Tools"
+                                    "AlwaysCreate" = "11:FALSE"
+                                    "Condition" = "8:"
+                                    "Transitive" = "11:FALSE"
+                                    "Property" = "8:_2C02FEC2F9534A598A86D61218A374D3"
+                                        "Folders"
+                                        {
+                                            "{461E96AF-1495-11D3-8D6C-00A0C9CFCEE6}:_E2A2A544481143058D3A16CE9214AC30"
+                                            {
+                                            "Name" = "8:Binn"
+                                            "AlwaysCreate" = "11:FALSE"
+                                            "Condition" = "8:"
+                                            "Transitive" = "11:FALSE"
+                                            "Property" = "8:_902BFBE437DC4E5383C19C287EBB15B2"
+                                                "Folders"
+                                                {
+                                                    "{461E96AF-1495-11D3-8D6C-00A0C9CFCEE6}:_E9ADB7C3F1AD462495FF233AE9E9D450"
+                                                    {
+                                                    "Name" = "8:Resources"
+                                                    "AlwaysCreate" = "11:FALSE"
+                                                    "Condition" = "8:"
+                                                    "Transitive" = "11:FALSE"
+                                                    "Property" = "8:_A84E1478230643D294CEAAC2F0867CFF"
+                                                        "Folders"
+                                                        {
+                                                            "{461E96AF-1495-11D3-8D6C-00A0C9CFCEE6}:_008C9AB44CA74D028A92E4C9F5A9B628"
+                                                            {
+                                                            "Name" = "8:1033"
+                                                            "AlwaysCreate" = "11:FALSE"
+                                                            "Condition" = "8:"
+                                                            "Transitive" = "11:FALSE"
+                                                            "Property" = "8:_76B341B9D6D54BBB969E767CA96339A6"
+                                                                "Folders"
+                                                                {
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            "{777C097F-0ED8-11D3-8D6C-00A0C9CFCEE6}:_455F73DB836140C884B3F6723E3E40F2"
+            {
+            "Name" = "8:#1914"
+            "AlwaysCreate" = "11:FALSE"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Property" = "8:SystemFolder"
+                "Folders"
+                {
+                }
+            }
+            "{777C097F-0ED8-11D3-8D6C-00A0C9CFCEE6}:_BA63644A1C694EA990B387F679F880F5"
+            {
+            "Name" = "8:#1919"
+            "AlwaysCreate" = "11:FALSE"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Property" = "8:ProgramMenuFolder"
+                "Folders"
+                {
+                    "{461E96AF-1495-11D3-8D6C-00A0C9CFCEE6}:_5AB21F2E0FDD4642A27F892AD9E000E9"
+                    {
+                    "Name" = "8:MSDE Admin"
+                    "AlwaysCreate" = "11:FALSE"
+                    "Condition" = "8:"
+                    "Transitive" = "11:FALSE"
+                    "Property" = "8:_0E9992F5BB124F0596F2625477D43A91"
+                        "Folders"
+                        {
+                        }
+                    }
+                }
+            }
+            "{EE62640D-12F2-11D3-8D6C-00A0C9CFCEE6}:_F7F049FA2F5146BC853001A849546DD9"
+            {
+            "DefaultLocation" = "8:[ProgramFilesFolder]\\[ProductName]"
+            "Name" = "8:#1925"
+            "AlwaysCreate" = "11:FALSE"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Property" = "8:TARGETDIR"
+                "Folders"
+                {
+                }
+            }
+        }
+        "LaunchCondition"
+        {
+        }
+        "Locator"
+        {
+        }
+        "Shortcut"
+        {
+            "{D0C99CFE-1238-11D3-8E00-00C04F6837D0}:_EEC0E790D303421B9B818A1B64C62A1A"
+            {
+            "Name" = "8:MSDE Admin"
+            "Arguments" = "8:"
+            "Description" = "8:"
+            "ShowCmd" = "3:1"
+            "IconIndex" = "3:0"
+            "Transitive" = "11:FALSE"
+            "Target" = "8:_CA8200DB4EF34F8B832A285383B25FF8"
+            "Folder" = "8:_5AB21F2E0FDD4642A27F892AD9E000E9"
+            "WorkingFolder" = "8:_F7F049FA2F5146BC853001A849546DD9"
+            "Icon" = "8:"
+            "Feature" = "8:"
+            }
+        }
+        "Sequences"
+        {
+        }
+        "Registry"
+        {
+            "HKLM"
+            {
+                "Keys"
+                {
+                    "{7DF0CD0A-FF27-11D2-8D6B-00A0C9CFCEE6}:_BA1E99306D6D4AE5A50C4E2688644F4C"
+                    {
+                    "Name" = "8:Software"
+                    "Condition" = "8:"
+                    "AlwaysCreate" = "11:FALSE"
+                    "DeleteAtUninstall" = "11:FALSE"
+                    "Transitive" = "11:FALSE"
+                        "Keys"
+                        {
+                            "{7DF0CD0A-FF27-11D2-8D6B-00A0C9CFCEE6}:_FF760AC5E29F4DC992CB718A51C38B8C"
+                            {
+                            "Name" = "8:[Manufacturer]"
+                            "Condition" = "8:"
+                            "AlwaysCreate" = "11:FALSE"
+                            "DeleteAtUninstall" = "11:FALSE"
+                            "Transitive" = "11:FALSE"
+                                "Keys"
+                                {
+                                }
+                                "Values"
+                                {
+                                }
+                            }
+                        }
+                        "Values"
+                        {
+                        }
+                    }
+                }
+            }
+            "HKCU"
+            {
+                "Keys"
+                {
+                    "{7DF0CD0A-FF27-11D2-8D6B-00A0C9CFCEE6}:_AC974EC4849E42A3AD769E24E703E361"
+                    {
+                    "Name" = "8:Software"
+                    "Condition" = "8:"
+                    "AlwaysCreate" = "11:FALSE"
+                    "DeleteAtUninstall" = "11:FALSE"
+                    "Transitive" = "11:FALSE"
+                        "Keys"
+                        {
+                            "{7DF0CD0A-FF27-11D2-8D6B-00A0C9CFCEE6}:_9EBEABAC95EC446B9D9C83E85F3C22E5"
+                            {
+                            "Name" = "8:[Manufacturer]"
+                            "Condition" = "8:"
+                            "AlwaysCreate" = "11:FALSE"
+                            "DeleteAtUninstall" = "11:FALSE"
+                            "Transitive" = "11:FALSE"
+                                "Keys"
+                                {
+                                }
+                                "Values"
+                                {
+                                }
+                            }
+                        }
+                        "Values"
+                        {
+                        }
+                    }
+                }
+            }
+            "HKCR"
+            {
+                "Keys"
+                {
+                }
+            }
+            "HKU"
+            {
+                "Keys"
+                {
+                }
+            }
+            "HKPU"
+            {
+                "Keys"
+                {
+                }
+            }
+        }
+        "ProjectOutput"
+        {
+        }
+        "Product"
+        {
+        "Name" = "8:Microsoft Visual Studio"
+        "ProductName" = "8:MSDE Admin"
+        "ProductCode" = "8:{2C1BFC72-545D-4F44-B1AE-588FEF08D456}"
+        "PackageCode" = "8:{6C8C285F-7ED2-4D35-AEB9-2F14BF5981E6}"
+        "UpgradeCode" = "8:{E1C09A3F-A7BA-4BCC-A7E5-2EEC99A8C6F9}"
+        "RestartWWWService" = "11:FALSE"
+        "RemovePreviousVersions" = "11:FALSE"
+        "DetectNewerInstalledVersion" = "11:TRUE"
+        "ProductVersion" = "8:1.0.0"
+        "Manufacturer" = "8:Microsoft"
+        "ARPHELPTELEPHONE" = "8:"
+        "ARPHELPLINK" = "8:"
+        "Title" = "8:MSDE Admin"
+        "Subject" = "8:"
+        "ARPCONTACT" = "8:Microsoft"
+        "Keywords" = "8:"
+        "ARPCOMMENTS" = "8:"
+        "ARPURLINFOABOUT" = "8:"
+        "ARPPRODUCTICON" = "8:"
+        "ARPIconIndex" = "3:0"
+        "SearchPath" = "8:"
+        "UseSystemSearchPath" = "11:TRUE"
+        }
+        "MsiBootstrapper"
+        {
+        "LangId" = "3:1033"
+        }
+        "MergeModule"
+        {
+        }
+        "UserInterface"
+        {
+            "{7DFFC192-4ABE-11D3-8D78-00A0C9CFCEE6}:_1FFA5EF7C9504C1E85DAD2D00AF2F6DB"
+            {
+            "Name" = "8:#1900"
+            "Sequence" = "3:1"
+            "Attributes" = "3:1"
+                "Dialogs"
+                {
+                    "{E4ECAB24-4AB7-11D3-8D78-00A0C9CFCEE6}:_9031B48675744B9988DA9A20686F088C"
+                    {
+                    "Sequence" = "3:300"
+                    "DisplayName" = "8:Confirm Installation"
+                    "UseDynamicProperties" = "11:TRUE"
+                    "IsDependency" = "11:FALSE"
+                    "SourcePath" = "8:<VsdDialogDir>\\VsdConfirmDlg.wid"
+                    "ModuleSignature" = "8:VsdDialogs.6DBC9783_3677_4D68_8BF5_D749558A0AC1"
+                        "Properties"
+                        {
+                            "BannerBitmap"
+                            {
+                            "Name" = "8:BannerBitmap"
+                            "DisplayName" = "8:#1001"
+                            "Description" = "8:#1101"
+                            "Type" = "3:8"
+                            "ContextData" = "8:Bitmap"
+                            "Attributes" = "3:4"
+                            "Setting" = "3:1"
+                            "UsePlugInResources" = "11:TRUE"
+                            }
+                        }
+                    }
+                    "{E4ECAB24-4AB7-11D3-8D78-00A0C9CFCEE6}:_94CE3F8F50EE4DD0B60578C8F40151D9"
+                    {
+                    "Sequence" = "3:200"
+                    "DisplayName" = "8:Installation Folder"
+                    "UseDynamicProperties" = "11:TRUE"
+                    "IsDependency" = "11:FALSE"
+                    "SourcePath" = "8:<VsdDialogDir>\\VsdFolderDlg.wid"
+                    "ModuleSignature" = "8:VsdDialogs.C113BC36_2532_4D45_8099_4818B1133B2F"
+                        "Properties"
+                        {
+                            "BannerBitmap"
+                            {
+                            "Name" = "8:BannerBitmap"
+                            "DisplayName" = "8:#1001"
+                            "Description" = "8:#1101"
+                            "Type" = "3:8"
+                            "ContextData" = "8:Bitmap"
+                            "Attributes" = "3:4"
+                            "Setting" = "3:1"
+                            "UsePlugInResources" = "11:TRUE"
+                            }
+                        }
+                    }
+                    "{E4ECAB24-4AB7-11D3-8D78-00A0C9CFCEE6}:_C78BA13A04E046CFA7996F3BD94DFD6B"
+                    {
+                    "Sequence" = "3:100"
+                    "DisplayName" = "8:Welcome"
+                    "UseDynamicProperties" = "11:TRUE"
+                    "IsDependency" = "11:FALSE"
+                    "SourcePath" = "8:<VsdDialogDir>\\VsdWelcomeDlg.wid"
+                    "ModuleSignature" = "8:VsdDialogs.68F69290_BB7C_474E_A153_6679845F3DDF"
+                        "Properties"
+                        {
+                            "BannerBitmap"
+                            {
+                            "Name" = "8:BannerBitmap"
+                            "DisplayName" = "8:#1001"
+                            "Description" = "8:#1101"
+                            "Type" = "3:8"
+                            "ContextData" = "8:Bitmap"
+                            "Attributes" = "3:4"
+                            "Setting" = "3:1"
+                            "UsePlugInResources" = "11:TRUE"
+                            }
+                            "CopyrightWarning"
+                            {
+                            "Name" = "8:CopyrightWarning"
+                            "DisplayName" = "8:#1002"
+                            "Description" = "8:#1102"
+                            "Type" = "3:3"
+                            "ContextData" = "8:"
+                            "Attributes" = "3:0"
+                            "Setting" = "3:1"
+                            "Value" = "8:#1202"
+                            "DefaultValue" = "8:#1202"
+                            "UsePlugInResources" = "11:TRUE"
+                            }
+                            "Welcome"
+                            {
+                            "Name" = "8:Welcome"
+                            "DisplayName" = "8:#1003"
+                            "Description" = "8:#1103"
+                            "Type" = "3:3"
+                            "ContextData" = "8:"
+                            "Attributes" = "3:0"
+                            "Setting" = "3:1"
+                            "Value" = "8:#1203"
+                            "DefaultValue" = "8:#1203"
+                            "UsePlugInResources" = "11:TRUE"
+                            }
+                        }
+                    }
+                }
+            }
+            "{7DFFC192-4ABE-11D3-8D78-00A0C9CFCEE6}:_20B0E3A2E31E46A3A4D0DE494F7C0103"
+            {
+            "Name" = "8:#1901"
+            "Sequence" = "3:1"
+            "Attributes" = "3:2"
+                "Dialogs"
+                {
+                    "{E4ECAB24-4AB7-11D3-8D78-00A0C9CFCEE6}:_E3F73420C8774F4993780E0E5524F8BF"
+                    {
+                    "Sequence" = "3:100"
+                    "DisplayName" = "8:Progress"
+                    "UseDynamicProperties" = "11:TRUE"
+                    "IsDependency" = "11:FALSE"
+                    "SourcePath" = "8:<VsdDialogDir>\\VsdProgressDlg.wid"
+                    "ModuleSignature" = "8:VsdDialogs.4FB12620_0D15_42D0_8677_2766FFA6923F"
+                        "Properties"
+                        {
+                            "BannerBitmap"
+                            {
+                            "Name" = "8:BannerBitmap"
+                            "DisplayName" = "8:#1001"
+                            "Description" = "8:#1101"
+                            "Type" = "3:8"
+                            "ContextData" = "8:Bitmap"
+                            "Attributes" = "3:4"
+                            "Setting" = "3:1"
+                            "UsePlugInResources" = "11:TRUE"
+                            }
+                            "ShowProgress"
+                            {
+                            "Name" = "8:ShowProgress"
+                            "DisplayName" = "8:#1009"
+                            "Description" = "8:#1109"
+                            "Type" = "3:5"
+                            "ContextData" = "8:1;True=1;False=0"
+                            "Attributes" = "3:0"
+                            "Setting" = "3:0"
+                            "Value" = "3:1"
+                            "DefaultValue" = "3:1"
+                            "UsePlugInResources" = "11:TRUE"
+                            }
+                        }
+                    }
+                }
+            }
+            "{E4ECAB26-4AB7-11D3-8D78-00A0C9CFCEE6}:_60BF38C5DDA049FE97BC484BD0587377"
+            {
+            "UseDynamicProperties" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "SourcePath" = "8:<VsdDialogDir>\\VsdUserInterface.wim"
+            "ModuleSignature" = "8:VsdUserInterface.524F4245_5254_5341_4C45_534153783400"
+            }
+            "{E4ECAB26-4AB7-11D3-8D78-00A0C9CFCEE6}:_70C66811E2E947FA8BCF9D0C751FCE09"
+            {
+            "UseDynamicProperties" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "SourcePath" = "8:<VsdDialogDir>\\VsdBasicDialogs.wim"
+            "ModuleSignature" = "8:VsdDialogs.CE4B864F_F1C1_4B85_98D4_2A2BF5FFB12B"
+            }
+            "{7DFFC192-4ABE-11D3-8D78-00A0C9CFCEE6}:_883B8593CD4F4FDC92697C483E7235C4"
+            {
+            "Name" = "8:#1900"
+            "Sequence" = "3:2"
+            "Attributes" = "3:1"
+                "Dialogs"
+                {
+                    "{E4ECAB24-4AB7-11D3-8D78-00A0C9CFCEE6}:_948C270488AD4B8C9F86A6D3A35C1684"
+                    {
+                    "Sequence" = "3:300"
+                    "DisplayName" = "8:Confirm Installation"
+                    "UseDynamicProperties" = "11:TRUE"
+                    "IsDependency" = "11:FALSE"
+                    "SourcePath" = "8:<VsdDialogDir>\\VsdAdminConfirmDlg.wid"
+                    "ModuleSignature" = "8:VsdDialogs.FA58E60A_A1E8_4876_95FC_2AC3B5AAA5F8"
+                        "Properties"
+                        {
+                            "BannerBitmap"
+                            {
+                            "Name" = "8:BannerBitmap"
+                            "DisplayName" = "8:#1001"
+                            "Description" = "8:#1101"
+                            "Type" = "3:8"
+                            "ContextData" = "8:Bitmap"
+                            "Attributes" = "3:4"
+                            "Setting" = "3:1"
+                            "UsePlugInResources" = "11:TRUE"
+                            }
+                        }
+                    }
+                    "{E4ECAB24-4AB7-11D3-8D78-00A0C9CFCEE6}:_B87DC274622242698987431C678015D5"
+                    {
+                    "Sequence" = "3:100"
+                    "DisplayName" = "8:Welcome"
+                    "UseDynamicProperties" = "11:TRUE"
+                    "IsDependency" = "11:FALSE"
+                    "SourcePath" = "8:<VsdDialogDir>\\VsdAdminWelcomeDlg.wid"
+                    "ModuleSignature" = "8:VsdDialogs.E35A0E2C_F131_4B57_B946_59A1A2A8F45F"
+                        "Properties"
+                        {
+                            "BannerBitmap"
+                            {
+                            "Name" = "8:BannerBitmap"
+                            "DisplayName" = "8:#1001"
+                            "Description" = "8:#1101"
+                            "Type" = "3:8"
+                            "ContextData" = "8:Bitmap"
+                            "Attributes" = "3:4"
+                            "Setting" = "3:1"
+                            "UsePlugInResources" = "11:TRUE"
+                            }
+                            "CopyrightWarning"
+                            {
+                            "Name" = "8:CopyrightWarning"
+                            "DisplayName" = "8:#1002"
+                            "Description" = "8:#1102"
+                            "Type" = "3:3"
+                            "ContextData" = "8:"
+                            "Attributes" = "3:0"
+                            "Setting" = "3:1"
+                            "Value" = "8:#1202"
+                            "DefaultValue" = "8:#1202"
+                            "UsePlugInResources" = "11:TRUE"
+                            }
+                            "Welcome"
+                            {
+                            "Name" = "8:Welcome"
+                            "DisplayName" = "8:#1003"
+                            "Description" = "8:#1103"
+                            "Type" = "3:3"
+                            "ContextData" = "8:"
+                            "Attributes" = "3:0"
+                            "Setting" = "3:1"
+                            "Value" = "8:#1203"
+                            "DefaultValue" = "8:#1203"
+                            "UsePlugInResources" = "11:TRUE"
+                            }
+                        }
+                    }
+                    "{E4ECAB24-4AB7-11D3-8D78-00A0C9CFCEE6}:_C2FB0C3307A742F4B27735D409806A26"
+                    {
+                    "Sequence" = "3:200"
+                    "DisplayName" = "8:Installation Folder"
+                    "UseDynamicProperties" = "11:TRUE"
+                    "IsDependency" = "11:FALSE"
+                    "SourcePath" = "8:<VsdDialogDir>\\VsdAdminFolderDlg.wid"
+                    "ModuleSignature" = "8:VsdDialogs.2DED2424_5429_4616_A1AD_4D62837C2ADA"
+                        "Properties"
+                        {
+                            "BannerBitmap"
+                            {
+                            "Name" = "8:BannerBitmap"
+                            "DisplayName" = "8:#1001"
+                            "Description" = "8:#1101"
+                            "Type" = "3:8"
+                            "ContextData" = "8:Bitmap"
+                            "Attributes" = "3:4"
+                            "Setting" = "3:1"
+                            "UsePlugInResources" = "11:TRUE"
+                            }
+                        }
+                    }
+                }
+            }
+            "{7DFFC192-4ABE-11D3-8D78-00A0C9CFCEE6}:_C17DA510458D469C81683F76B3948FEC"
+            {
+            "Name" = "8:#1901"
+            "Sequence" = "3:2"
+            "Attributes" = "3:2"
+                "Dialogs"
+                {
+                    "{E4ECAB24-4AB7-11D3-8D78-00A0C9CFCEE6}:_F6C29F1C2B4849D297ED26977EA34DF2"
+                    {
+                    "Sequence" = "3:100"
+                    "DisplayName" = "8:Progress"
+                    "UseDynamicProperties" = "11:TRUE"
+                    "IsDependency" = "11:FALSE"
+                    "SourcePath" = "8:<VsdDialogDir>\\VsdAdminProgressDlg.wid"
+                    "ModuleSignature" = "8:VsdDialogs.EE9A1AFA_41DD_4514_B727_DF0ACA1D7389"
+                        "Properties"
+                        {
+                            "BannerBitmap"
+                            {
+                            "Name" = "8:BannerBitmap"
+                            "DisplayName" = "8:#1001"
+                            "Description" = "8:#1101"
+                            "Type" = "3:8"
+                            "ContextData" = "8:Bitmap"
+                            "Attributes" = "3:4"
+                            "Setting" = "3:1"
+                            "UsePlugInResources" = "11:TRUE"
+                            }
+                            "ShowProgress"
+                            {
+                            "Name" = "8:ShowProgress"
+                            "DisplayName" = "8:#1009"
+                            "Description" = "8:#1109"
+                            "Type" = "3:5"
+                            "ContextData" = "8:1;True=1;False=0"
+                            "Attributes" = "3:0"
+                            "Setting" = "3:0"
+                            "Value" = "3:1"
+                            "DefaultValue" = "3:1"
+                            "UsePlugInResources" = "11:TRUE"
+                            }
+                        }
+                    }
+                }
+            }
+            "{7DFFC192-4ABE-11D3-8D78-00A0C9CFCEE6}:_D0264D160AAE473AA3AA103B8866DF9F"
+            {
+            "Name" = "8:#1902"
+            "Sequence" = "3:2"
+            "Attributes" = "3:3"
+                "Dialogs"
+                {
+                    "{E4ECAB24-4AB7-11D3-8D78-00A0C9CFCEE6}:_33B6004CBE74439AB35FA0593F5D3978"
+                    {
+                    "Sequence" = "3:100"
+                    "DisplayName" = "8:Finished"
+                    "UseDynamicProperties" = "11:TRUE"
+                    "IsDependency" = "11:FALSE"
+                    "SourcePath" = "8:<VsdDialogDir>\\VsdAdminFinishedDlg.wid"
+                    "ModuleSignature" = "8:VsdDialogs.83D22742_1B79_46f6_9A99_DF0F2BD4C077"
+                        "Properties"
+                        {
+                            "BannerBitmap"
+                            {
+                            "Name" = "8:BannerBitmap"
+                            "DisplayName" = "8:#1001"
+                            "Description" = "8:#1101"
+                            "Type" = "3:8"
+                            "ContextData" = "8:Bitmap"
+                            "Attributes" = "3:4"
+                            "Setting" = "3:1"
+                            "UsePlugInResources" = "11:TRUE"
+                            }
+                        }
+                    }
+                }
+            }
+            "{7DFFC192-4ABE-11D3-8D78-00A0C9CFCEE6}:_F7A05EEDCCAA4497A68FAC8215F0EDBF"
+            {
+            "Name" = "8:#1902"
+            "Sequence" = "3:1"
+            "Attributes" = "3:3"
+                "Dialogs"
+                {
+                    "{E4ECAB24-4AB7-11D3-8D78-00A0C9CFCEE6}:_7C6E54F29E894999B124B34F652CBEDD"
+                    {
+                    "Sequence" = "3:100"
+                    "DisplayName" = "8:Finished"
+                    "UseDynamicProperties" = "11:TRUE"
+                    "IsDependency" = "11:FALSE"
+                    "SourcePath" = "8:<VsdDialogDir>\\VsdFinishedDlg.wid"
+                    "ModuleSignature" = "8:VsdDialogs.1DB77F5A_BA5C_4470_89B6_0B0EC07E3A10"
+                        "Properties"
+                        {
+                            "BannerBitmap"
+                            {
+                            "Name" = "8:BannerBitmap"
+                            "DisplayName" = "8:#1001"
+                            "Description" = "8:#1101"
+                            "Type" = "3:8"
+                            "ContextData" = "8:Bitmap"
+                            "Attributes" = "3:4"
+                            "Setting" = "3:1"
+                            "UsePlugInResources" = "11:TRUE"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

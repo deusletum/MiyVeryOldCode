@@ -1,0 +1,5 @@
+c:\users\dean\documents\visual studio 2010\Projects\NoDir\NoDir\bin\Debug\NoDir.exe
+c:\users\dean\documents\visual studio 2010\Projects\NoDir\NoDir\bin\Debug\NoDir.pdb
+c:\users\dean\documents\visual studio 2010\Projects\NoDir\NoDir\obj\x86\Debug\ResolveAssemblyReference.cache
+c:\users\dean\documents\visual studio 2010\Projects\NoDir\NoDir\obj\x86\Debug\NoDir.exe
+c:\users\dean\documents\visual studio 2010\Projects\NoDir\NoDir\obj\x86\Debug\NoDir.pdb

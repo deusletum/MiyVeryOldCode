@@ -1,0 +1,45 @@
+Microsoft Visual Studio Solution File, Format Version 8.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NScriptW", "nscriptw\NScriptW.csproj", "{FE287167-1309-43EE-B898-8E9969F63D26}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NScript", "nscript\NScript.csproj", "{1624B82E-9813-4C8C-BDC7-1886E79DA482}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NScriptLib", "nscript.lib\NScriptLib.csproj", "{64AB3AF7-7C34-4275-AD24-E0E1FCD08FEE}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "setup", "setup\setup.vdproj", "{93F39598-FC8B-4C3C-87FC-A9FFABAEB377}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfiguration) = preSolution
+		Debug = Debug
+		Release = Release
+	EndGlobalSection
+	GlobalSection(ProjectConfiguration) = postSolution
+		{FE287167-1309-43EE-B898-8E9969F63D26}.Debug.ActiveCfg = Release|.NET
+		{FE287167-1309-43EE-B898-8E9969F63D26}.Debug.Build.0 = Release|.NET
+		{FE287167-1309-43EE-B898-8E9969F63D26}.Release.ActiveCfg = Release|.NET
+		{FE287167-1309-43EE-B898-8E9969F63D26}.Release.Build.0 = Release|.NET
+		{1624B82E-9813-4C8C-BDC7-1886E79DA482}.Debug.ActiveCfg = Release|.NET
+		{1624B82E-9813-4C8C-BDC7-1886E79DA482}.Debug.Build.0 = Release|.NET
+		{1624B82E-9813-4C8C-BDC7-1886E79DA482}.Release.ActiveCfg = Release|.NET
+		{1624B82E-9813-4C8C-BDC7-1886E79DA482}.Release.Build.0 = Release|.NET
+		{64AB3AF7-7C34-4275-AD24-E0E1FCD08FEE}.Debug.ActiveCfg = Release|.NET
+		{64AB3AF7-7C34-4275-AD24-E0E1FCD08FEE}.Debug.Build.0 = Release|.NET
+		{64AB3AF7-7C34-4275-AD24-E0E1FCD08FEE}.Release.ActiveCfg = Release|.NET
+		{64AB3AF7-7C34-4275-AD24-E0E1FCD08FEE}.Release.Build.0 = Release|.NET
+		{93F39598-FC8B-4C3C-87FC-A9FFABAEB377}.Debug.ActiveCfg = Release
+		{93F39598-FC8B-4C3C-87FC-A9FFABAEB377}.Debug.Build.0 = Release
+		{93F39598-FC8B-4C3C-87FC-A9FFABAEB377}.Release.ActiveCfg = Release
+		{93F39598-FC8B-4C3C-87FC-A9FFABAEB377}.Release.Build.0 = Release
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+	EndGlobalSection
+	GlobalSection(ExtensibilityAddIns) = postSolution
+	EndGlobalSection
+EndGlobal

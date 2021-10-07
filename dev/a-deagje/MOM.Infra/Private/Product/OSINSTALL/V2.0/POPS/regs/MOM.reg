@@ -1,0 +1,6 @@
+Windows Registry Editor Version 5.00
+
+* Allow MOM to install on W2K3
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\AppCompatFlags]
+"{A9B7EA24-D2A2-4FC6-8FFA-D5A06A2FE3EF}"=dword:00000001

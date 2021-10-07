@@ -1,0 +1,21 @@
+Microsoft Visual Studio Solution File, Format Version 7.00
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "MSDE Admin", "MSDE Admin.vdproj", "{DF5F2E43-A7A1-43DD-B3FE-6F13F7E16087}"
+EndProject
+Global
+	GlobalSection(SolutionConfiguration) = preSolution
+		ConfigName.0 = Debug
+		ConfigName.1 = Release
+	EndGlobalSection
+	GlobalSection(ProjectDependencies) = postSolution
+	EndGlobalSection
+	GlobalSection(ProjectConfiguration) = postSolution
+		{DF5F2E43-A7A1-43DD-B3FE-6F13F7E16087}.Debug.ActiveCfg = Debug
+		{DF5F2E43-A7A1-43DD-B3FE-6F13F7E16087}.Debug.Build.0 = Debug
+		{DF5F2E43-A7A1-43DD-B3FE-6F13F7E16087}.Release.ActiveCfg = Release
+		{DF5F2E43-A7A1-43DD-B3FE-6F13F7E16087}.Release.Build.0 = Release
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+	EndGlobalSection
+	GlobalSection(ExtensibilityAddIns) = postSolution
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,81 @@
+[Components]
+accessopt       Accessibility Wizard
+calc            Calculator
+cdplayer        CD Player
+certsrv         Certificate Services
+certsrv_client  Web client components of Certificate Services
+certsrv_server  Server components of Certificate Services (works on Server SKUs only)
+                Requires certsrv_client
+charmap         Character Map
+chat            Chat
+cluster         Cluster service Node and Administration components (Win2K-AS/DC only)
+                Requires iis_common
+deskpaper       Desktop wallpaper
+dialer          Phone Dialer
+fp              FrontPage server extentions
+                Requires: iis_common, iis_inetmgr, iis_www
+freecell        Freecell
+hypertrm        HyperTerminal
+iis_common      Common IIS files
+iisdbg          MS Script Debugger
+iis_doc         IIS documentation
+                Implies iis_common, iis_inetmgr, iis_www
+iis_ftp         FTP Service
+                Implies iis_common, iis_inetmgr
+iis_htmla       HTML-based administration tools for IIS
+                Implies iis_common, iis_inetmgr, iis_www
+iis_inetmgr     MMC administration tools for IIS
+                Implies iis_common
+iis_nntp        NNTP service
+                Implies iis_common, iis_inetmgr, iis_www
+iis_nntp_docs   NNTP service documentation
+                Implies iis_common, iis_inetmgr, iis_www
+iis_pwmgr       Personal Web Manager (W2K Pro only)
+                Implies iis_common, iis_inetmgr, iis_www
+iis_smtp        SMTP Service
+                Implies iis_common, iis_inetmgr, iis_www
+iis_smtp_docs   SMTP Service documentation
+                Implies iis_common, iis_inetmgr, iis_www
+iis_www         WWW service
+                Implies iis_common, iis_inetmgr
+indexsrv_system Index Service
+                Implies iis_common, iis_inetmgr, iis_www
+LicenseServer   Terminal Services licensing (domain controllers/workgroup server only)
+media_clips     Sample sound clips
+media_utopia    Utopia sound scheme
+minesweeper      Minesweeper
+mousepoint      All available mouse pointers
+mplay           Media Player
+msmq            MS Message Queuing components
+mswordpad       WordPad
+netcis          MS COM Internet Services
+                Requires iis_common, iis_inetmgr, iis_www
+netoc           Installs optional networking components (see [NetOptionalComponents])
+objectpkg       Object Packager
+paint           Paint
+pinball         Pinball
+rec             Sound Recorder
+reminst         Remote Installation Services
+rstorage        Remote Storage Service
+solitaire       Solitaire
+templates       Document templates
+TSClients       Files to create Terminal Services client disks
+TSEnable        Terminal Services (Server SKUs only)
+vol             Volume Control
+
+[NetOptionalComponents]
+ACS             QoS Admission Control Service (Server SKUs only)
+DHCPServer      DHCP Server (Server SKUs only)
+DNS             DNS (Server SKUs only)
+IAS             Internet Authentication Services (Server SKUs only)
+ILS             Internet Location Service (Server SKUs only)
+                Requires iis_common, iis_inetmgr, iis_www, com
+LPDSVC          Print Services for UNIX
+MacPrint        Print Services for Macintosh (Server SKUs only)
+MacSrv          Services for Macintosh (Server SKUs only)
+Netcm           MS Connection Manager Administration Kit and Phone Book Service (Server SKUs only)
+                Requires iis_common, iis_inetmgr, iis_www
+NETMONTOOLS     Network Monitor tools (Server SKUs only)
+SimpTCP         Simple TCP/IP Services
+SNMP            SNMP
+WINS            WINS (Server SKUs only)

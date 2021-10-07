@@ -1,0 +1,33 @@
+;SetupMgrTag
+[Unattended]
+    OemSkipEula=Yes
+    InstallFilesPath=C:\sysprep\i386
+
+[GuiUnattended]
+    AdminPassword="vb_1193"
+    EncryptedAdminPassword=NO
+    AutoLogon=Yes
+    AutoLogonCount=-1
+    OEMSkipRegional=1
+    TimeZone=4
+    OemSkipWelcome=1
+
+[UserData]
+    ProductKey=V3T2B-HRDFK-PYX9X-VCWVY-Y9PHW
+    FullName="Visual Studio Performance Team"
+    OrgName=
+    ComputerName=*
+
+[SetupMgr]
+    DistFolder=C:\sysprep\i386
+    DistShare=windist
+
+[GuiRunOnce]
+    Command0=c:\misc\RPS_Prep.cmd
+
+[Identification]
+    JoinWorkgroup=WORKGROUP
+
+[Networking]
+    InstallDefaultComponents=Yes
+

@@ -1,0 +1,11 @@
+[Version]                     
+   Signature = "$Windows NT$"
+[Global]                     
+   FreshMode=Custom          
+[Components]                 
+   MSMQ=On                   
+   MSMQ_Core=On              
+   MSMQ_LocalStorage=On      
+[MSMQ]                       
+   Type=IND                  
+   DisableAD=True            

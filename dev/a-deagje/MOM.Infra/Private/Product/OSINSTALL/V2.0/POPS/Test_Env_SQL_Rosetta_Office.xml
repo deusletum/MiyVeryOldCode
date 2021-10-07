@@ -1,0 +1,313 @@
+<!-- Copyright . 2003                                         -->
+<!--                                                                        -->
+<!-- Module : Test_Env.xml                                                  -->
+<!-- Summary: Designed to operate with POPS 2.0 to execute a list of        -->
+<!--          actions after the testOS has finished installation            -->
+<!--                                                                        -->
+<!-- History: (08/10/2003) Created                                          -->
+
+
+<product name="POPS2.0">
+<!--   ENTRY
+       Desc    : brief description of what the Action does
+       Action  : short name of Action - must be unique and in UCase
+                 (used to reference Entry in XML from a *.vbs/*.wsf file)
+       Reboot  : signifies whether a reboot is required/expected for Action
+                 (yes; no)
+           COMMAND
+           Key     : command file extension (cmd; bat; vbs; wsf; exe)
+           Value   : path to command file that will execute the Action
+               PARAMETER
+               Key       : list out individual parameters (for modification purposes)
+               Value     : parameters to feed into command file
+-->
+
+<entry enable="on" reboot="no"     action="COPYTOOLS" desc="Copy tools , Add to Path, and Register .Dlls">
+    <command key="cmd" value="%TOOLSRV%\drop\copytools.cmd">
+        <parameter key="param1" value="all"/>
+    </command>
+</entry>
+
+<entry enable="on" reboot="no"     action="PATRON_OUT" desc="Check-Out machine to ML3 using Patron">
+    <command key="vbs" value="%SYSTEMROOT%\bricktools\librarypatron.vbs" errorchk="off">
+        <parameter key="param1" value="Checkout"/>
+        <parameter key="param2" value="SMXOASIS"/>
+        <parameter key="param3" value="1"/>
+        <parameter key="param4" value='"%COMPUTERNAME%- Configuring TestO/S(%SYSTEMDRIVE%) via POPS 2.0"'/>
+    </command>
+</entry>
+
+<entry enable="on" reboot="no"     action="REGKEY_IMPORT" desc="Imports all regkeys">
+    <command key="cmd" value="%TOOLSRV%\POPS\RegImport.cmd" errorchk="off">
+    </command>
+</entry>
+
+<entry enable="on" reboot="no"     action="AUTOIISW3SVC" desc="Autostart IIS W3 Service">
+    <command key="exe" value="%SYSTEMROOT%\idw\sc.exe" errorchk="off">
+        <parameter key="param1" value="config"/>
+        <parameter key="param2" value="w3svc"/>
+        <parameter key="param3" value="start= auto"/>
+    </command>
+    <command key="exe" value="%SYSTEMROOT%\idw\sc.exe" errorchk="off">
+        <parameter key="param1" value="start"/>
+        <parameter key="param2" value="w3svc"/>
+    </command>
+</entry>
+
+<entry enable="on" reboot="no"     action="ADDADMINS" desc="Add Users to Admin Groups">
+    <command key="vbs" value="%SYSTEMROOT%\bricktools\admins.vbs">
+        <parameter key="param1" value="%DOMAIN%"/>
+        <parameter key="pwrite" value="asttest-1,acsadmin-1,momactionact-1"/>
+        <parameter key="param3" value="/add"/>
+    </command>
+</entry>
+
+<entry enable="on" reboot="no"     action="ADDUSERS" desc="Add Users to Various Groups">
+    <command key="vbs" value="%SYSTEMROOT%\bricktools\admins.vbs"
+                       errorchk="off">
+        <parameter key="param1" value="%DOMAIN%"/>
+        <parameter key="pwrite" value="smx_backup-2,smx_guest-3,smx_poweruser-4,smx_repl-5,smx_user-6"/>
+        <parameter key="param3" value="/add"/>
+    </command>
+</entry>
+
+<entry enable="on" reboot="no"     action="ADDASTTEST" desc="Add SMX\Asttest to the Admin Groups">
+    <command key="vbs" value="%SYSTEMROOT%\bricktools\admins.vbs" errorchk="off">
+        <parameter key="param1" value="SMX.NET"/>
+        <parameter key="pwrite" value="asttest-1"/>
+        <parameter key="param3" value="/add"/>
+    </command>
+</entry>
+
+<entry enable="on" reboot="no"     action="FAKEPRTR" desc="Establish Fake Printer">
+    <command key="exe" value="rundll32.exe">
+        <parameter key="param1" value="printui.dll,PrintUIEntry"/>
+        <parameter key="param2" value="/if"/>
+        <parameter key="param3" value='/b "Fake Printer"'/>
+        <parameter key="param4" value='/f "%windir%\inf\ntprint.inf"'/>
+        <parameter key="param5" value='/r "com1:"'/>
+        <parameter key="param6" value='/m "Generic / Text Only"'/>
+    </command>
+</entry>
+
+<entry enable="on" reboot="no"     action="ADDDNS" desc="Set DNS Search suffixes">
+    <command key="vbs" value="%SYSTEMROOT%\bricktools\add_dns.vbs"/>
+</entry>
+
+<entry enable="on" reboot="no"     action="DEBUGGER" desc="Install symbols for debuggers">
+    <command key="cmd" value="%TOOLSRV%\drop\inst_dbg.cmd">
+        <parameter key="pwrite" value=""/>
+    </command>
+</entry>
+
+<entry enable="on" reboot="no"     action="ACCESS20" desc="Install Active Accessibility 2.0">
+    <command key="exe" value="%PRODUCTSRV%\msaa20\setup.exe" errorchk="off">
+        <parameter key="param1" value="/s"/>
+    </command>
+</entry>
+
+<entry enable="on" reboot="no"     action="CHECKINIPS" desc="Check in IPS">
+    <command key="exe" value="%SYSTEMROOT%\bricktools\setip.cmd" errorchk="off">
+        <parameter key="param1" value="checkin"/>
+        <parameter key="param2" value="noapply"/>
+    </command>
+</entry>
+
+<entry enable="on"  reboot="yes"    action="MDAC" desc="Install MDAC 2.8">
+    <command key="cmd" value="%TOOLSRV%\drop\inst_mdac.cmd">
+        <parameter key="pwrite" value=""/>
+    </command>
+</entry>
+
+<entry enable="on"  reboot="no"    action="MDAC_Hotfix" desc="Install MDAC 2.8 Hotfixes">
+    <command key="cmd" value="%TOOLSRV%\drop\mdac_hotfix.cmd">
+        <parameter key="pwrite" value=""/>
+    </command>
+</entry>
+
+<entry enable="on"  reboot="no"    action="ENABLEBROWSER" desc="Enable Browser Service">
+    <command key="vbs" value="%TOOLSRV%\toolbox\EnableBrowserService.vbs">
+        <parameter key="pwrite" value=""/>
+    </command>
+</entry>
+
+<entry enable="on" reboot="no"     action="ADDLOWPRIVUSER" desc="Add Users to Various Groups">
+    <command key="exe" value="%SYSTEMROOT%\bricktools\ConfigActionAccount.exe"
+                       errorchk="off">
+        <parameter key="param1" value="/USER:%DOMAIN%\momActionActLowPriv"/>
+        <parameter key="pwrite" value="/allmp"/>
+    </command>
+</entry>
+
+<entry enable="on" reboot="no"     action="NM" desc="Enable NetMeeting remote desktop sharing">
+    <command key="exe" value="%SYSTEMROOT%\bricktools\enablerc.exe" errorchk="off"/>
+</entry>
+
+<entry enable="on" reboot="no"     action="TS" desc="Copy TSClient files">
+    <command key="exe" value="xcopy">
+        <parameter key="param1" value="%PRODUCTSRV%\tsclient\release\mstsc.exe"/>
+        <parameter key="param2" value="%SYSTEMROOT%\system32\"/>
+        <parameter key="param3" value="/qcyd"/>
+    </command>
+    <command key="exe" value="xcopy">
+        <parameter key="param1" value="%PRODUCTSRV%\tsclient\release\mstscax.dll"/>
+        <parameter key="param2" value="%SYSTEMROOT%\system32\"/>
+        <parameter key="param3" value="/qcyd"/>
+    </command>
+</entry>
+
+<entry enable="on"  reboot="no"    action="WSH" desc="Update WSH">
+    <command key="cmd" value="%TOOLSRV%\drop\update_WSH.cmd"/>
+</entry>
+
+<entry enable="on" reboot="no"     action="CSCRIPT" desc="Set CScript to default">
+    <command key="exe" value="cscript.exe" errorchk="off">
+        <parameter key="param1" value="//H:cscript"/>
+        <parameter key="param2" value="//nologo"/>
+        <parameter key="param3" value="//S"/>
+    </command>
+</entry>
+
+<entry enable="on"  reboot="no"    action="MSXML" desc="Update MSXML to 3.0 SP1">
+    <command key="exe" value="%PRODUCTSRV%\msxml\msxml3sp1.exe">
+        <parameter key="param1" value="/Q"/>
+        <parameter key="param2" value='/C:"msiexec /I msxml3.msi /qn"'/>
+    </command>
+</entry>
+
+<entry enable="on" reboot="no"     action="TAT" desc="Create TOPO file">
+    <command key="vbs" value="%SYSTEMROOT%\bricktools\machineinfo.vbs">
+        <parameter key="param1" value="topology"/>
+    </command>
+</entry>
+
+<entry enable="on" reboot="no"     action="BF" desc="Clean up Boot.ini and change boot flags">
+    <command key="vbs" value="%SYSTEMROOT%\bricktools\boot.vbs">
+        <parameter key="param1" value="/time:10"/>
+        <parameter key="pwrite" value=""/>
+    </command>
+</entry>
+
+<!-- BITS Install -->
+<entry enable="on" reboot="no"    action="BITS_SERVER" desc="Install BITS Server">
+    <command key="cmd" value="%TOOLSRV%\drop\Inst_BITS.cmd" errorchk="off">
+        <parameter key="param1" value="server"/>
+    </command>
+</entry>
+
+<entry enable="on" reboot="no"    action="BITS_CLIENT" desc="Install BITS Client">
+    <command key="cmd" value="%TOOLSRV%\drop\Inst_BITS.cmd" errorchk="off">
+        <parameter key="param1" value="Client"/>
+    </command>
+</entry>
+<!-- BITS Install -->
+
+<!--  **REBOOT**  -->
+<entry enable="on" reboot="yes"    action="IE" desc="Install IE">
+    <command key="cmd" value="%TOOLSRV%\drop\inst_IE.cmd">
+        <parameter key="pwrite" value=""/>
+    </command>
+</entry>
+
+<entry enable="on" reboot="no"     action="SQL" desc="Install SQL">
+    <command key="vbs" value="%TOOLSRV%\drop\inst_sql.vbs">
+        <parameter key="param1" value="/version:ent"/>
+        <parameter key="param1" value='/sqlinstance:"instance1"'/>
+        <parameter key="param2" value="/collation:SQL_Latin1_General_Cp1_CS_AS"/>
+    </command>
+</entry>
+
+<entry enable="on" reboot="no"     action="ROSETTA" desc="Install Rosetta">
+    <command key="vbs" value="%TOOLSRV%\drop\inst_Rosetta.js">
+        <parameter key="param1" value="/build:latest"/>
+        <parameter key="param2" value="/DBSERVER:%COMPUTERNAME%\INSTANCE1"/>
+        <parameter key="param3" value="/SP1"/>
+    </command>
+</entry>
+
+<entry enable="on" reboot="no"      action="OFFICE2K" desc="Install Office 2000">
+    <command key="cmd" value="%TOOLSRV%\drop\offinst.cmd">
+        <parameter key="param1" value="Office"/>
+        <parameter key="param2" value="2k"/>
+        <parameter key="param3" value="/NOREBOOT"/>
+    </command>
+</entry>
+
+<!--  **REBOOT**  -->
+<entry enable="on" reboot="yes"    action="REBOOTFORSQL" desc="Reboot after SQL">
+    <command key="exe" value="%SYSTEMROOT%\idw\sleep.exe">
+        <parameter key="param1" value="5"/>
+    </command>
+    <command key="vbs" value="%SYSTEMROOT%\bricktools\boot.vbs">
+        <parameter key="param1" value="/reboot"/>
+    </command>
+</entry>
+
+<entry enable="on" reboot="no"     action="VIDEO" desc="Ensure default video monitor settings">
+    <command key="exe" value="%SYSTEMROOT%\bricktools\chres.exe" errorchk="off">
+        <parameter key="param1" value="/W:1024"/>
+        <parameter key="param2" value="/H:768"/>
+        <parameter key="param3" value="/C:16"/>
+        <parameter key="param4" value="/F:70"/>
+    </command>
+</entry>
+
+<entry enable="on" reboot="no"     action="IEHOTFIX" desc="Install IE Hotfix MS04-004 on w2k">
+    <command key="cmd" value="%TOOLSRV%\drop\IEHotfix.cmd" errorchk="off"/>
+</entry>
+
+<!--  **REBOOT**  -->
+<entry enable="on" reboot="yes"    action="REBOOTFORHOTFIX" desc="Reboot after IE Hotfixes">
+    <command key="exe" value="%SYSTEMROOT%\idw\sleep.exe">
+        <parameter key="param1" value="5"/>
+    </command>
+    <command key="vbs" value="%SYSTEMROOT%\bricktools\boot.vbs">
+        <parameter key="param1" value="/reboot"/>
+    </command>
+</entry>
+
+<entry enable="on" reboot="no"     action="RUNTESTCMD" desc="Setup desktop shortcuts.">
+    <command key="cmd" value="%TOOLSRV%\toolbox\MOMBvtSetup\Tools\MOMBvtSetup.cmd" errorchk="off"/>
+</entry>
+
+<entry enable="on"  reboot="no"    action="Etrust" desc="Install Etrust">
+    <command key="cmd" value="%TOOLSRV%\DROP\INST_ETRUST.CMD" errorchk="off">
+    </command>
+</entry>
+
+<!--  **REBOOT**  -->
+<entry enable="on" reboot="yes"    action="REBOOTFORETRUST" desc="Reboot after Etrust">
+    <command key="exe" value="%SYSTEMROOT%\idw\sleep.exe">
+        <parameter key="param1" value="5"/>
+    </command>
+    <command key="vbs" value="%SYSTEMROOT%\bricktools\boot.vbs">
+        <parameter key="param1" value="/reboot"/>
+    </command>
+</entry>
+
+<entry enable="on" reboot="no"     action="BACKGROUND" desc="Set background information">
+    <command key="cmd" value="%SYSTEMROOT%\bricktools\background.cmd" errorchk="off"/>
+</entry>
+
+<entry enable="on" reboot="no"     action="REMOTECMD" desc="Start a remote command window">
+    <command key="cmd" value="%SYSTEMROOT%\bricktools\remotecmd.cmd" errorchk="off"/>
+</entry>
+
+<entry enable="on" reboot="no"     action="PATRON_IN" desc="Check-In machine to ML3 using Patron">
+    <command key="vbs" value="%SYSTEMROOT%\bricktools\librarypatron.vbs" errorchk="off">
+        <parameter key="param1" value="Add"/>
+        <parameter key="param2" value="SMXOASIS"/>
+        <parameter key="param3" value='""'/>
+        <parameter key="param4" value='""'/>
+    </command>
+    <command key="vbs" value="%SYSTEMROOT%\bricktools\librarypatron.vbs" errorchk="off">
+        <parameter key="param1" value="CheckIn"/>
+        <parameter key="param2" value="SMXOASIS"/>
+    </command>
+</entry>
+
+<entry enable="on" reboot="no"     action="DITS_RESUME" desc="Resume any DITS job on hold">
+    <command key="wsf" value="%SYSTEMROOT%\bricktools\ResumeDITS.wsf" errorchk="off"/>
+</entry>
+
+</product>
