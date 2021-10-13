@@ -1,5 +1,0 @@
-c:\users\dean\documents\visual studio 2010\Projects\GetDirsAndFiles\GetDirsAndFiles\bin\Debug\GetDirsAndFiles.exe
-c:\users\dean\documents\visual studio 2010\Projects\GetDirsAndFiles\GetDirsAndFiles\bin\Debug\GetDirsAndFiles.pdb
-c:\users\dean\documents\visual studio 2010\Projects\GetDirsAndFiles\GetDirsAndFiles\obj\x86\Debug\ResolveAssemblyReference.cache
-c:\users\dean\documents\visual studio 2010\Projects\GetDirsAndFiles\GetDirsAndFiles\obj\x86\Debug\GetDirsAndFiles.exe
-c:\users\dean\documents\visual studio 2010\Projects\GetDirsAndFiles\GetDirsAndFiles\obj\x86\Debug\GetDirsAndFiles.pdb

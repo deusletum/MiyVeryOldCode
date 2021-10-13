@@ -1,7 +1,0 @@
-Windows Registry Editor Version 5.00
-
-* Reserve MOM TCP/IP Ports
-
-[HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters]
-"ReservedPorts"=hex(7):31,00,32,00,37,00,30,00,2d,00,31,00,32,00,37,00,32,00,\
- 00,00,00,00

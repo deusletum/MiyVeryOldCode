@@ -1,5 +1,0 @@
-c:\users\dean\documents\visual studio 2010\Projects\Vbox\Vbox\obj\Debug\ResolveAssemblyReference.cache
-c:\users\dean\documents\visual studio 2010\Projects\Vbox\Vbox\bin\Debug\Vbox.dll
-c:\users\dean\documents\visual studio 2010\Projects\Vbox\Vbox\bin\Debug\Vbox.pdb
-c:\users\dean\documents\visual studio 2010\Projects\Vbox\Vbox\obj\Debug\Vbox.dll
-c:\users\dean\documents\visual studio 2010\Projects\Vbox\Vbox\obj\Debug\Vbox.pdb

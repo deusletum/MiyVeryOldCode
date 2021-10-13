@@ -1,1 +1,0 @@
-call tools\razzle.cmd
