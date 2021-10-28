@@ -1,3 +1,0 @@
-Select disk 0
-list partition
-exit

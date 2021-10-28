@@ -1,7 +1,0 @@
-Select disk 0
-clean
-
-create partition primary size 4096
-assign letter c
-Active
-Exit
